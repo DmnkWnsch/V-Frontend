@@ -1,3 +1,7 @@
+<script>
+  import { Accordion, AccordionItem } from "sveltestrap";
+
+</script>
 <svelte:head>
 	<title>About</title>
 	<meta name="description" content="About this app" />
@@ -5,6 +9,12 @@
 
 <div class="text-column">
 	<h1>About this app</h1>
+
+	<Accordion flush>
+		<AccordionItem active header="Alpha">Alpha Flight</AccordionItem>
+		<AccordionItem header="Bravo">Johnny Bravo</AccordionItem>
+		<AccordionItem header="Charlie">Charlie Brown</AccordionItem>
+	</Accordion>
 
 	<p>
 		This is a <a href="https://kit.svelte.dev">SvelteKit</a> app. You can make your own by typing the
