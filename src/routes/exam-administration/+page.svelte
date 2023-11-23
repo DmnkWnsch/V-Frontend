@@ -95,7 +95,7 @@
 		</Nav>
 	</Navbar>
 </div>
-<Container fluid class="bg-light my-5 border border-dark rounded">
+<Container class="bg-light my-5 border border-dark rounded">
 	<Row class="bg_grey_1 py-2">
 		<Col >
 			<h5><b>Gesamtkonto</b></h5>
@@ -116,7 +116,7 @@
 		</Row>
 	</Row>
 </Container>
-<Container fluid class="bg-light ">
+<Container class="bg-light ">
 	<Row cols={2} class="py-2">
 		<Col>
 			<h4>Abgeschlossene Prüfung</h4>
@@ -136,7 +136,7 @@
 		</Col>
 	</Row>
 </Container>
-<Container fluid class="bg_grey_1">
+<Container class="bg_grey_1">
 	<p class="py-2 my-0"><b>Filtern</b></p>
 	<hr class="hr my-0" />
 	<Row cols={2} class="py-2">
@@ -196,13 +196,15 @@
 	</Row>
 </Container>
 
-<div class="mt-5">
-	<svelte:component this={Exam_container} active="true" data={exam_data_mathematics_3}/>
-</div>
-
-<div class="mt-5">
-	<svelte:component this={Exam_container} active="false" data={exam_data_mathematics_3}/>
-</div>
+<Container>
+	<div class="mt-5">
+		<svelte:component this={Exam_container} active="true" data={exam_data_mathematics_3}/>
+	</div>
+	
+	<div class="mt-5">
+		<svelte:component this={Exam_container} active="false" data={exam_data_mathematics_3}/>
+	</div>
+</Container>
 
 
 
