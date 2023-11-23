@@ -1,4 +1,5 @@
 <script>
+// import sveltestrap components
   import {
     Nav,
     NavItem,
@@ -19,6 +20,8 @@
 	FormGroup
   } from 'sveltestrap';
 
+// import custom components
+  import Exam_container from './custom_components/exam_container.svelte';
 
 </script>
 
@@ -164,6 +167,9 @@
 	</Row>
 </Container>
 
+<div class="mt-5">
+	<Exam_container/>
+</div>
 
 
 
