@@ -23,6 +23,34 @@
 // import custom components
   import Exam_container from './custom_components/exam_container.svelte';
 
+  let exam_data_mathematics_3 = {
+	"name"		:	"Mathematik III",
+	"points"	:	9,
+	"id"		:	200003,
+	"sub_exams"	:	[
+		{
+			"name"			:	"Aufgabenkomplexe",
+			"type"			:	"Prüfungsvorleistung",
+			"result"		:	"bestanden",
+			"points"		:	3,
+			"date"			:	"Wintersemester 2023",
+			"exam_content"	:	"Abgabe von Übungsaufgaben",
+			"semester"		:	"Wintersemester 2022",
+			"examiners"		:	"Max Mustermann, Hermann Mann, Christian Franz"
+		},
+		{
+			"name"			:	"",
+			"type"			:	"Schriftiliche Prüfung",
+			"result"		:	1.0,
+			"points"		:	6,
+			"date"			:	"07.02.2023",
+			"exam_content"	:	"schriftlich",
+			"semester"		:	"Wintersemester 2022",
+			"examiners"		:	"Max Mustermann, Hermann Mann, Christian Franz"
+		}
+	]
+  }
+
 </script>
 
 <svelte:head>
@@ -168,7 +196,7 @@
 </Container>
 
 <div class="mt-5">
-	<Exam_container/>
+	<svelte:component this={Exam_container} active="true" data={exam_data_mathematics_3}/>
 </div>
 
 

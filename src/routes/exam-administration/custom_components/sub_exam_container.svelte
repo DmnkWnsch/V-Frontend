@@ -1,16 +1,19 @@
 <script>
+  // import sveltestrap components
     import {
         Container,
         Row,
         Col,
         Button
         } from 'sveltestrap';
+
+    export let data;
 </script>
 
 <Container fluid class="my-3 bg-light border border-dark rounded">
   <Row class="bg_grey_1 py-2">
 		<Col >
-			<h5><b>Prüfungsvvorleistung: </b>Aufgabenkomplexe</h5>
+			<h5><b>{data["type"]}: </b>{data["name"]}</h5>
 		</Col>
 	</Row>
   <Row cols={2} class="py-1">
@@ -22,25 +25,25 @@
               <p><b>Bewertung:</b></p>
             </Col>
             <Col>
-              <p>bestanden</p>
+              <p>{data["result"]}</p>
             </Col>
             <Col>
               <p><b>Leistungspunkte:</b></p>
             </Col>
             <Col>
-              <p>3</p>
+              <p>{data["points"]}</p>
             </Col>
             <Col>
               <p><b>Datum:</b></p>
             </Col>
             <Col>
-              <p>Wintersemester 2023</p>
+              <p>{data["date"]}</p>
             </Col>
             <Col>
               <p><b>Prügungsart:</b></p>
             </Col>
             <Col>
-              <p>Abgabe von Übungsaufgaben</p>
+              <p>{data["exam_content"]}</p>
             </Col>
           </Row>
         </Col>
@@ -50,13 +53,13 @@
           <p><b>Semester der Leistung:</b></p>
         </Col>
         <Col>
-          <p>Wintersemester 2022</p>
+          <p>{data["semester"]}</p>
         </Col>
         <Col>
           <p><b>Prüfer:</b></p>
         </Col>
         <Col>
-          <p>Max Mustermann, Hermann Mann, Christian Franz</p>
+          <p>{data["examiners"]}</p>
         </Col>
           </Row>
         </Col>
