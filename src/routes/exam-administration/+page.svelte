@@ -25,6 +25,7 @@
 
   let exam_data_mathematics_3 = {
 	"name"		:	"Mathematik III",
+	"tags"		:	[ "schriftlich" , "PVL" ],
 	"points"	:	9,
 	"id"		:	200003,
 	"sub_exams"	:	[
