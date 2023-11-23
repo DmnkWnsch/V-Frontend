@@ -1,18 +1,36 @@
 <script>
+// @ts-nocheck
+
 	import Header from './Header.svelte';
 	import './styles.css';
+	import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,Dropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'sveltestrap';
+
+	let isOpen = false;
+  // @ts-ignore
+  	function handleUpdate(event) {
+    	isOpen = event.detail.isOpen;
+ 	}
 </script>
 
 <div class="app">
-	<Header />
+	<Navbar style="background-color: #0e4e3f" dark expand="md">
+		<NavbarBrand>Prüfungsverwaltung</NavbarBrand>
+		<NavbarToggler on:click={() => (isOpen = !isOpen)} />
+		<Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
+		  <Nav class="ms-auto" navbar>
+			<NavItem>
+			  <NavLink href="/">Anmeldung</NavLink>
+			</NavItem>
+			<NavItem>
+			  <NavLink href="/about">Leistungsübersicht</NavLink>
+			</NavItem>
+		  </Nav>
+		</Collapse>
+	  </Navbar>
 
 	<main>
 		<slot />
 	</main>
-
-	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
-	</footer>
 </div>
 
 <style>
@@ -31,23 +49,5 @@
 		max-width: 64rem;
 		margin: 0 auto;
 		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
 	}
 </style>
