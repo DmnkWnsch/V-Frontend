@@ -1,8 +1,7 @@
 <script>
 // @ts-nocheck
 
-	import Header from './Header.svelte';
-	import './styles.css';
+	import '../styles.css';
 	import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,Dropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'sveltestrap';
 
 	let isOpen = false;
