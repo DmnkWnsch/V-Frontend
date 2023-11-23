@@ -200,6 +200,9 @@
 	<svelte:component this={Exam_container} active="true" data={exam_data_mathematics_3}/>
 </div>
 
+<div class="mt-5">
+	<svelte:component this={Exam_container} active="false" data={exam_data_mathematics_3}/>
+</div>
 
 
 
