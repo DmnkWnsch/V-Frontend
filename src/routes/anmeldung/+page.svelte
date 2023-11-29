@@ -311,7 +311,9 @@
 							</Row>
 						</Col>
 						<Col xs="auto"> 
-							<Button color='danger'>Abmelden</Button>
+							<Container class="h-100 d-flex justify-content-center align-items-center">
+								<Button color='danger'>Abmelden</Button>
+							</Container>
 						</Col>
 					</Row>
 				</CardBody>
