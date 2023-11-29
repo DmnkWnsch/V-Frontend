@@ -1,6 +1,6 @@
 <script lang="ts">
 // @ts-nocheck
-	import {Accordion,AccordionItem,Button,Card,CardBody,CardHeader,CardTitle,Col,Container,FormCheck,FormGroup,Input,Row} from 'sveltestrap'
+	import {Accordion,AccordionItem,Badge,Button,Card,CardBody,CardHeader,CardTitle,Col,Container,FormCheck,FormGroup,Input,InputGroup,Row} from 'sveltestrap'
 </script>
 
 <svelte:head>
@@ -38,7 +38,9 @@
 							</Row>
 						</Col>
 						<Col xs="auto"> 
-							<Button color='danger'>Abmelden</Button>
+							<Container class="h-100 d-flex justify-content-center align-items-center">
+								<Button color='danger'>Abmelden</Button>
+							</Container>
 						</Col>
 					</Row>
 				</CardBody>
@@ -52,6 +54,12 @@
 		<Col>
 			<h1>Anmelden zu einer Prüfung</h1>
 		</Col>
+		<Col>
+			<InputGroup>
+				<Input placeholder="Prüfung finden"/>
+				<Button>Suchen</Button>
+			</InputGroup>
+		</Col>
 		<Col xs="auto">
 			<div><Button light color='info'>Filter</Button></div>
 		</Col>
@@ -59,6 +67,7 @@
 
 	<Container style="background-color: #f6f6f6">
 		Filter
+
 		<hr class="my-2"/>
 		<Row>
 			<Col xs=6>	
@@ -115,7 +124,12 @@
 	</Container>
 	<br/>
 	<Accordion>
-		<AccordionItem header="Mathematik III">
+		<AccordionItem>
+			<h2 slot="header">
+				<div class="d-flex justify-content-start">
+					<b>Mathematik III</b>
+				</div>
+			</h2>
 			<Card>
 				<CardHeader>
 					<CardTitle>Prüfungsvorleistung: Aufgabenkomplexe</CardTitle>
@@ -141,7 +155,9 @@
 							</Row>
 						</Col>
 						<Col xs="auto"> 
-							<Button color='success'>Anmelden</Button>
+							<Container class="h-100 d-flex justify-content-center align-items-center">
+								<Button color='success'>Anmelden</Button>
+							</Container>
 						</Col>
 					</Row>
 				</CardBody>
@@ -174,7 +190,9 @@
 							</Row>
 						</Col>
 						<Col xs="auto"> 
-							<Button color='success'>Anmelden</Button>
+							<Container class="h-100 d-flex justify-content-center align-items-center">
+								<Button color='success'>Anmelden</Button>
+							</Container>
 						</Col>
 					</Row>
 				</CardBody>
@@ -183,7 +201,12 @@
 	</Accordion>
 	<br/>
 	<Accordion>
-		<AccordionItem header="Theoretische Informatik I">
+		<AccordionItem>
+			<h2 slot="header">
+				<div>
+					<b>Theoretische Informatik I</b>
+				</div>
+			</h2>
 			<Card>
 				<CardHeader>
 					<CardTitle>Prüfungsvorleistung: Übungsaufgaben</CardTitle>
@@ -209,7 +232,9 @@
 							</Row>
 						</Col>
 						<Col xs="auto"> 
-							<Button color='success'>Anmelden</Button>
+							<Container class="h-100 d-flex justify-content-center align-items-center">
+								<Button color='success'>Anmelden</Button>
+							</Container>
 						</Col>
 					</Row>
 				</CardBody>
@@ -242,7 +267,9 @@
 							</Row>
 						</Col>
 						<Col xs="auto"> 
-							<Button color='success'>Anmelden</Button>
+							<Container class="h-100 d-flex justify-content-center align-items-center">
+								<Button color='success'>Anmelden</Button>
+							</Container>
 						</Col>
 					</Row>
 				</CardBody>
@@ -251,7 +278,12 @@
 	</Accordion>
 	<br/>
 	<Accordion>
-		<AccordionItem header="Datenbanken Grundlagen">
+		<AccordionItem>
+			<h2 slot="header">
+				<div>
+					<b>Datenbanken Grundlagen</b>
+				</div>
+			</h2>
 			<Card>
 				<CardHeader>
 					<CardTitle>Schriftliche Prüfung</CardTitle>

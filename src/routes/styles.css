@@ -97,6 +97,7 @@ h1 {
 }
 h2 {
 	font-size: 1em;
+	margin: 0;
 }
 
 .accordion-button:not(.collapsed) {
@@ -111,6 +112,10 @@ h2 {
 	margin: 0;
 }
 
+.container{
+	padding-top: calc(var(--bs-gutter-x) * .5);
+	
+}
 .button{
 	padding: 0.2em;
 	top:50%;
