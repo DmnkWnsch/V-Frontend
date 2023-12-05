@@ -126,8 +126,20 @@
 	<Accordion>
 		<AccordionItem>
 			<h2 slot="header">
-				<div class="d-flex justify-content-start">
+				<div class="d-flex justify-content-end">
 					<b>Mathematik III</b>
+					<span class="mx-5">
+						<b>ID: </b>200003
+					</span>
+					<span>
+						<b>Leistungspunkte: </b>9
+					</span>
+					<span class="mx-5">
+						<Badge color="primary">schriftlich</Badge>
+					</span>	
+					<span class="mx-5">
+						<Badge color="warning">PVL</Badge>
+					</span>			
 				</div>
 			</h2>
 			<Card>
@@ -203,8 +215,20 @@
 	<Accordion>
 		<AccordionItem>
 			<h2 slot="header">
-				<div>
+				<div class="d-flex justify-content-end">
 					<b>Theoretische Informatik I</b>
+					<span class="mx-5">
+						<b>ID: </b>500210
+					</span>
+					<span>
+						<b>Leistungspunkte: </b>8
+					</span>
+					<span class="mx-5">
+						<Badge color="info">mündlich</Badge>
+					</span>	
+					<span class="mx-5">
+						<Badge color="warning">PVL</Badge>
+					</span>			
 				</div>
 			</h2>
 			<Card>
@@ -280,8 +304,17 @@
 	<Accordion>
 		<AccordionItem>
 			<h2 slot="header">
-				<div>
+				<div class="d-flex justify-content-end">
 					<b>Datenbanken Grundlagen</b>
+					<span class="mx-5">
+						<b>ID: </b>565150
+					</span>
+					<span>
+						<b>Leistungspunkte: </b>5
+					</span>
+					<span class="mx-5">
+						<Badge color="primary">schriftlich</Badge>
+					</span>			
 				</div>
 			</h2>
 			<Card>
