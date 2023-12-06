@@ -82,13 +82,13 @@
 			<span class="span_white" >Prüfungsverwaltung</span>
 		</NavbarBrand>
 		<Nav pills>
-				<NavItem>
-					<NavLink href="#" >
-						<span class="span_white" >Prüfungsanmeldung</span>
-					</NavLink>
-				</NavItem>
 			<NavItem>
-				<NavLink href="#" class="nav_link" active>
+				<NavLink href="/anmeldung" >
+					<span class="span_white" >Prüfungsanmeldung</span>
+				</NavLink>
+			</NavItem>
+			<NavItem>
+				<NavLink href="/exam-administration" class="nav_link" active>
 					<span class="span_white" >Leistungsübersicht</span>
 				</NavLink>
 			</NavItem>
