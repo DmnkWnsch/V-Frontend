@@ -25,44 +25,44 @@
           <Col>
             <Row cols={2}>
               <Col>
-                <p><b>Bewertung:</b></p>
+                <b>Bewertung:</b>
               </Col>
               <Col>
-                <p>{data["result"]}</p>
+                {data["result"]}
               </Col>
               <Col>
-                <p><b>Leistungspunkte:</b></p>
+                <b>Leistungspunkte:</b>
               </Col>
               <Col>
-                <p>{data["points"]}</p>
+                {data["points"]}
               </Col>
               <Col>
-                <p><b>Datum:</b></p>
+                <b>Datum:</b>
               </Col>
               <Col>
-                <p>{data["date"]}</p>
+                {data["date"]}
               </Col>
               <Col>
-                <p><b>Prügungsart:</b></p>
+                <b>Prügungsart:</b>
               </Col>
               <Col>
-                <p>{data["exam_content"]}</p>
+                {data["exam_content"]}
               </Col>
             </Row>
           </Col>
           <Col>
             <Row cols={2}>
           <Col>
-            <p><b>Semester der Leistung:</b></p>
+            <b>Semester der Leistung:</b>
           </Col>
           <Col>
-            <p>{data["semester"]}</p>
+            {data["semester"]}
           </Col>
           <Col>
             <p><b>Prüfer:</b></p>
           </Col>
           <Col>
-            <p>{data["examiners"]}</p>
+            {data["examiners"]}
           </Col>
             </Row>
           </Col>
