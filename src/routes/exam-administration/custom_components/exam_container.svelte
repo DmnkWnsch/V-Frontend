@@ -19,13 +19,26 @@
   
 </script>
 
+<style>
+  :global(.badge_schriftlich) {
+    background-color: #7749f8 !important;
+  }
+  :global(.badge_mündlich) {
+    background-color: #49a4f8 !important;
+  }
+  :global(.badge_PVL) {
+    background-color: #ffc107 !important;
+    color: black !important;
+  }
+</style>
+
 <Accordion>
   <AccordionItem {active}>
     <span slot="header">
       <div class="d-flex justify-content-between w-100">
         <b>{data["name"]}</b>
         {#each data["tags"] as value}
-          <Badge class="mx-1">{value}</Badge>
+          <Badge class="mx-1 badge_{value}">{value}</Badge>
         {/each}
         <span class="mx-5">
           <b>Leistungspunkte: </b>{data["points"]}
