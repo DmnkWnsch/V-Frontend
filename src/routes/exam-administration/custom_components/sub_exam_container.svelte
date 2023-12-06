@@ -10,7 +10,7 @@
     export let data;
 </script>
 
-<Container fluid class="my-3 bg-light border border-dark rounded">
+<Container class="my-3 bg-light border border-dark rounded">
   <Row class="bg_grey_1 py-2">
 		<Col >
 			<h5><b>{data["type"]}: </b>{data["name"]}</h5>

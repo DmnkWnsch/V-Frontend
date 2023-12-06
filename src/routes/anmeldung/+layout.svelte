@@ -18,10 +18,17 @@
 		<Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
 		  <Nav class="ms-auto" navbar>
 			<NavItem>
+<<<<<<< HEAD
 			  <NavLink href="/anmeldung">Anmeldung</NavLink>
 			</NavItem>
 			<NavItem>
 			  <NavLink href="/exam-administration">Leistungsübersicht</NavLink>
+=======
+			  <NavLink href="/">Anmeldung</NavLink>
+			</NavItem>
+			<NavItem>
+			  <NavLink href="/about">Leistungsübersicht</NavLink>
+>>>>>>> 9de4a80aad0f71a3bdd6bf6e7af8b5cfa7157007
 			</NavItem>
 		  </Nav>
 		</Collapse>
