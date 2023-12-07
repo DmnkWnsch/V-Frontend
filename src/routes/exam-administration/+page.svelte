@@ -50,7 +50,35 @@
 			"examiners"		:	"Max Mustermann, Hermann Mann, Christian Franz"
 		}
 	]
+  };
+
+  let filter_options = {
+	"anwendungsschwerpunkt"	:	"Medieninformatik",
+	"modulart"				:	"Basismodule",
+	"semester"				:	3,
+	"only_new_exams"		:	false
+  };
+
+  function search() {
+	
   }
+
+  function filter() {
+	
+  }
+
+  /*filter opions*/
+  function filter_anwendungsschwerpunkt(a) {
+	filter_options["anwendungsschwerpunkt"] = a;
+  }
+  function filter_modulart(m) {
+	filter_options["modulart"] = m;
+  }
+  function filter_semester(s) {
+	filter_options["semester"] = s;
+	console.log(filter_options);
+  }
+
 
 </script>
 
@@ -126,11 +154,11 @@
 				<Col sm={{ size: 6 , offset: 4 }}>
 					<InputGroup>
 						<Input placeholder="Prüfung finden" />
-						<Button>Suchen</Button>
+						<Button on:click={search} >Suchen</Button>
 					</InputGroup>
 				</Col>
 				<Col sm={{ size: 1 , offset: 0 }}>
-					<Button class="bg-info border border-0">Filter</Button>
+					<Button class="bg-info border border-0" on:click={filter} >Filter</Button>
 				</Col>
 			</Row>
 		</Col>
@@ -147,13 +175,13 @@
 				</Col>
 				<Col>
 					<Dropdown>
-						<DropdownToggle caret>Medieninformatik</DropdownToggle>
+						<DropdownToggle caret>{filter_options["anwendungsschwerpunkt"]}</DropdownToggle>
 						<DropdownMenu>
 						  <DropdownItem header>Anwendungsschwerpunkt</DropdownItem>
-						  <DropdownItem>Medieninformatik</DropdownItem>
-						  <DropdownItem>Computergrafik</DropdownItem>
-						  <DropdownItem>Eingebettete Systeme</DropdownItem>
-						  <DropdownItem>Verteilte Systeme</DropdownItem>
+						  <DropdownItem on:click={() => filter_anwendungsschwerpunkt("Medieninformatik")}>Medieninformatik</DropdownItem>
+						  <DropdownItem on:click={() => filter_anwendungsschwerpunkt("Computergrafik")}>Computergrafik</DropdownItem>
+						  <DropdownItem on:click={() => filter_anwendungsschwerpunkt("Eingebettete Systeme")}>Eingebettete Systeme</DropdownItem>
+						  <DropdownItem on:click={() => filter_anwendungsschwerpunkt("Verteilte Systeme")}>Verteilte Systeme</DropdownItem>
 						</DropdownMenu>
 					  </Dropdown>
 				</Col>
@@ -162,11 +190,12 @@
 				</Col>
 				<Col>
 					<Dropdown>
-						<DropdownToggle caret>Basismodule</DropdownToggle>
+						<DropdownToggle caret>{filter_options["modulart"]}</DropdownToggle>
 						<DropdownMenu>
 						  <DropdownItem header>Modulart</DropdownItem>
-						  <DropdownItem>Anwendungsschwerpunkt</DropdownItem>
-						  <DropdownItem>Schlüsselkompetenzen</DropdownItem>
+						  <DropdownItem on:click={() => filter_modulart("Basismodule")}>Basismodule</DropdownItem>
+						  <DropdownItem on:click={() => filter_modulart("Anwendungsschwerpunkt")}>Anwendungsschwerpunkt</DropdownItem>
+						  <DropdownItem on:click={() => filter_modulart("Schlüsselkompetenzen")}>Schlüsselkompetenzen</DropdownItem>
 						</DropdownMenu>
 					  </Dropdown>
 				</Col>
@@ -175,14 +204,15 @@
 				</Col>
 				<Col>
 					<Dropdown>
-						<DropdownToggle caret>3</DropdownToggle>
+						<DropdownToggle caret>{filter_options["semester"]}</DropdownToggle>
 						<DropdownMenu>
 						  <DropdownItem header>Semester</DropdownItem>
-						  <DropdownItem>1</DropdownItem>
-						  <DropdownItem>2</DropdownItem>
-						  <DropdownItem>4</DropdownItem>
-						  <DropdownItem>5</DropdownItem>
-						  <DropdownItem>6</DropdownItem>
+						  <DropdownItem on:click={() => filter_semester(1)}>1</DropdownItem>
+						  <DropdownItem on:click={() => filter_semester(2)}>2</DropdownItem>
+						  <DropdownItem on:click={() => filter_semester(3)}>3</DropdownItem>
+						  <DropdownItem on:click={() => filter_semester(4)}>4</DropdownItem>
+						  <DropdownItem on:click={() => filter_semester(5)}>5</DropdownItem>
+						  <DropdownItem on:click={() => filter_semester(6)}>6</DropdownItem>
 						</DropdownMenu>
 					  </Dropdown>
 				</Col>
@@ -190,7 +220,7 @@
 		</Col>
 		<Col>
 			<FormGroup>
-				<Input type="checkbox" label="Bestandene Prüfungen ausblenden" />
+				<Input bind:checked={filter_options["only_new_exams"]} type="checkbox" label="Bestandene Prüfungen ausblenden" />
 			</FormGroup>
 		</Col>
 	</Row>
