@@ -1,3 +1,16 @@
+<script>
+  export let form;
+
+  import Exam from "./components/exam.svelte";
+  import Moduletype from "./components/moduletype.svelte";
+  let examCount = 1;
+
+  const addExam = () => {
+    console.log("increasing");
+    examCount = examCount + 1;
+  };
+</script>
+
 <svelte:head>
   <title>PV-A Modulverwaltung</title>
   <meta name="description" content="About this app" />
@@ -6,15 +19,28 @@
 <h3 class="text-center mt-4">Modulverwaltung</h3>
 
 <div class="container bg-body-tertiary border my-4 p-3 shadow-sm">
-  <form action="" class="row g-3">
+  {#if form?.success}
+    <div class="alert alert-success" role="alert">
+      Das Modul {form?.id} - {form?.name} wurde erfolgreich gespeichert!
+    </div>
+  {/if}
+
+  <form action="?/saveModule" method="POST" class="row g-3">
     <div class="col-12 fs-5">Modulinformationen</div>
     <div class="col-12">
-      <label for="moduleId" class="form-label">Modul-Name</label>
-      <input type="text" class="form-control" id="moduleId" placeholder="XYZ" />
+      <label for="modulename" class="form-label">Modul-Name</label>
+      <input
+        name="modulename"
+        type="text"
+        class="form-control"
+        id="modulename"
+        placeholder="XYZ"
+      />
     </div>
     <div class="col-sm-6">
       <label for="moduleId" class="form-label">Modul-ID</label>
       <input
+        name="moduleid"
         type="text"
         class="form-control"
         id="moduleId"
@@ -23,88 +49,34 @@
     </div>
     <div class="col-sm-6">
       <label for="credits" class="form-label">Credits</label>
-      <input type="text" class="form-control" id="credits" placeholder="3" />
+      <input
+        name="credits"
+        type="text"
+        class="form-control"
+        id="credits"
+        placeholder="3"
+      />
     </div>
 
     <div class="col-12 fs-5 mt-5">Modulprüfungen</div>
-    <div class="col-sm-4 d-flex align-items-center">
-      <span class="fw-bold">Prüfung 1</span>
-    </div>
-    <div class="col-sm-4">
-      <label for="type" class="form-label">Prüfungsart</label>
-      <select class="form-select" id="credits">
-        <option selected>schriftliche Prüfung</option>
-        <option>mündliche Prüfung</option>
-        <option>Prüfungsvorleistung</option>
-      </select>
-    </div>
+    {#each Array(examCount) as _, index (index)}
+      <Exam id={index + 1} />
+    {/each}
     <div class="col-12">
-      <button class="btn btn-success btn-sm">Weitere Prüfung hinzufügen</button>
+      <button on:click={addExam} type="button" class="btn btn-success btn-sm"
+        >Weitere Prüfung hinzufügen</button
+      >
     </div>
 
     <div class="col-12 fs-5 mt-5">Typ des Moduls für verschiedene Kurse</div>
-    <div class="col-sm-4 d-flex align-items-center">
-      <span class="fw-bold">Eingebettete Systeme</span>
-    </div>
-    <div class="col-sm-4">
-      <label for="type" class="form-label">Modulart</label>
-      <select class="form-select" id="credits">
-        <option selected>Basismodul</option>
-        <option>Wahlpflichtmodul</option>
-        <option>Ergänzungsmodul</option>
-      </select>
-    </div>
-    <div class="col-sm-4">
-      <label for="credits" class="form-label">Geplantes Semester</label>
-      <input type="text" class="form-control" id="credits" placeholder="1-6" />
-    </div>
 
-    <div class="col-sm-4 d-flex align-items-center">
-      <span class="fw-bold">Medieninformatik</span>
-    </div>
-    <div class="col-sm-4">
-      <label for="type" class="form-label">Modulart</label>
-      <select class="form-select" id="credits">
-        <option selected>Basismodul</option>
-        <option>Wahlpflichtmodul</option>
-        <option>Ergänzungsmodul</option>
-      </select>
-    </div>
-    <div class="col-sm-4">
-      <label for="credits" class="form-label">Geplantes Semester</label>
-      <input type="text" class="form-control" id="credits" placeholder="1-6" />
-    </div>
+    <Moduletype name="Eingebettete Systeme" short="embedded" />
+    <Moduletype name="Medieninformatik" short="media" />
+    <Moduletype name="Verteilte Systeme" short="distri" />
+    <Moduletype name="Computergrafik" short="cg" />
 
-    <div class="col-sm-4 d-flex align-items-center">
-      <span class="fw-bold">Verteilte Systeme</span>
-    </div>
     <div class="col-sm-4">
-      <label for="type" class="form-label">Modulart</label>
-      <select class="form-select" id="credits">
-        <option selected>Basismodul</option>
-        <option>Wahlpflichtmodul</option>
-        <option>Ergänzungsmodul</option>
-      </select>
-    </div>
-    <div class="col-sm-4">
-      <label for="credits" class="form-label">Geplantes Semester</label>
-      <input type="text" class="form-control" id="credits" placeholder="1-6" />
-    </div>
-
-    <div class="col-sm-4 d-flex align-items-center">
-      <span class="fw-bold">Computergrafik</span>
-    </div>
-    <div class="col-sm-4">
-      <label for="type" class="form-label">Modulart</label>
-      <select class="form-select" id="credits">
-        <option selected>Basismodul</option>
-        <option>Wahlpflichtmodul</option>
-        <option>Ergänzungsmodul</option>
-      </select>
-    </div>
-    <div class="col-sm-4">
-      <label for="credits" class="form-label">Geplantes Semester</label>
-      <input type="text" class="form-control" id="credits" placeholder="1-6" />
+      <button class="btn btn-success">Modul speichern</button>
     </div>
   </form>
 </div>
