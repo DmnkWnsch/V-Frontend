@@ -2,15 +2,11 @@
   import { enhance } from "$app/forms";
 
   export let form;
-  export let data;
 
-  import Exam from "./components/exam.svelte";
+  import Exam from "../components/exam.svelte";
+  import Moduleedit from "../components/moduleedit.svelte";
   //import Moduleedit from "./components/moduleedit.svelte";
-  import Moduletype from "./components/moduletype.svelte";
-
-  const test = import("./components/moduleedit.svelte").then(
-    ({ default: C }) => C
-  );
+  import Moduletype from "../components/moduletype.svelte";
 
   let examCount = 1;
 
@@ -25,39 +21,6 @@
   <title>PV-A Modulverwaltung</title>
   <meta name="description" content="About this app" />
 </svelte:head>
-
-<h3 class="text-center mt-4">Modulverwaltung</h3>
-<h5 class="text-center">Module hinzufügen</h5>
-
-<div class="container bg-body-tertiary border my-4 p-3 shadow-sm">
-  <form action="" method="POST" class="row g-3">
-    <div class="col-12 fs-5">Modul bearbeiten</div>
-
-    <div class="col-12">
-      <label for="moduleselect" class="form-label">Modul auswählen</label>
-      <select
-        bind:value={selected}
-        name="moduleselect"
-        class="form-select"
-        id="moduleselect"
-      >
-        {#each data.modules as mod}
-          <option value={mod.id}>{mod.id} - {mod.name}</option>
-        {/each}
-      </select>
-    </div>
-
-    {#if selected}
-      {#key selected}
-        {#await test}
-          LOADING
-        {:then Comp}
-          <Comp id={selected} />
-        {/await}
-      {/key}
-    {/if}
-  </form>
-</div>
 
 <div class="container bg-body-tertiary border my-4 p-3 shadow-sm">
   {#if form?.success}
