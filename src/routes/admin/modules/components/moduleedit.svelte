@@ -1,4 +1,5 @@
 <script>
+  import consts from "../../../../consts";
   import Exam from "./exam.svelte";
   import Moduletype from "./moduletype.svelte";
 
@@ -31,22 +32,19 @@
   ];
 
   const loadExamsForModule = async () => {
-    const examsReq = await fetch(
-      "http://localhost:3210/modules/" + id + "/exams",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const examsReq = await fetch(consts.API_URL + "/modules/" + id + "/exams", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const examsRes = await examsReq.json();
     return examsRes;
   };
 
   const loadCourseTypes = async () => {
     const courseTypesReq = await fetch(
-      "http://localhost:3210/modules/" + id + "/course-types",
+      consts.API_URL + "/modules/" + id + "/course-types",
       {
         method: "GET",
         headers: {
