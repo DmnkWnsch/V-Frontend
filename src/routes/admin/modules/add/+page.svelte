@@ -80,7 +80,7 @@
     <Moduletype name="Computergrafik" short="cg" />
 
     <div class="col-sm-4">
-      <button class="btn btn-success">Modul speichern</button>
+      <button class="btn btn-success">Modul hinzufügen</button>
     </div>
   </form>
 </div>

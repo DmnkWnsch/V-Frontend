@@ -35,7 +35,7 @@
               <a
                 class="nav-link"
                 aria-current="page"
-                class:active={$page.url.pathname === path}
+                class:active={$page.url.pathname.startsWith(path)}
                 href={path}>{name}</a
               >
             </li>
