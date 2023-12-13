@@ -1,5 +1,6 @@
 <script>
   export let id;
+  export let selected = "WRITTEN";
   let exam = "" + id;
   let divId = "exam" + id;
   let examtype = "examtype" + id;
@@ -10,8 +11,13 @@
 </div>
 <div id={divId} class="col-sm-4">
   <label for={examtype} class="form-label">Prüfungsart</label>
-  <select name={examtype} class="form-select" id={examtype}>
-    <option selected value="WRITTEN">schriftliche Prüfung</option>
+  <select
+    bind:value={selected}
+    name={examtype}
+    class="form-select"
+    id={examtype}
+  >
+    <option value="WRITTEN">schriftliche Prüfung</option>
     <option value="ORAL">mündliche Prüfung</option>
     <option value="TASKS">Prüfungsvorleistung</option>
   </select>

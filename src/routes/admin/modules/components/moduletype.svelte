@@ -4,6 +4,7 @@
    */
   export let name;
   export let short;
+  export let selected = "BASE";
   let id = "moduletype_" + short;
   let ps = "plannedsemester_" + short;
 </script>
@@ -13,8 +14,8 @@
 </div>
 <div class="col-sm-4">
   <label for={id} class="form-label">Modulart</label>
-  <select name={id} class="form-select" {id}>
-    <option selected value="BASE">Basismodul</option>
+  <select bind:value={selected} name={id} class="form-select" {id}>
+    <option value="BASE">Basismodul</option>
     <option value="OPTIONAL">Wahlpflichtmodul</option>
     <option value="ADDITIONAL">Ergänzungsmodul</option>
   </select>
