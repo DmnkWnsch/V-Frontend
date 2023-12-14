@@ -3,12 +3,6 @@
 
   import Moduleedit from "../components/moduleedit.svelte";
 
-  let examCount = 1;
-
-  const addExam = () => {
-    examCount = examCount + 1;
-  };
-
   let selected = "";
 </script>
 
@@ -18,7 +12,7 @@
 </svelte:head>
 
 <div class="container bg-body-tertiary border my-4 p-3 shadow-sm">
-  <form action="" method="POST" class="row g-3">
+  <form action="?/saveModule" method="POST" class="row g-3">
     <div class="col-12 fs-5">Modul bearbeiten</div>
 
     <div class="col-12">
@@ -37,7 +31,11 @@
 
     {#if selected}
       {#key selected}
-        <Moduleedit id={selected} />
+        {#each data.modules as mod}
+          {#if mod.id + "" == selected}
+            <Moduleedit id={selected} name={mod.name} credits={mod.credits} />
+          {/if}
+        {/each}
       {/key}
     {/if}
   </form>

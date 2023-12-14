@@ -5,6 +5,10 @@
   export let name;
   export let short;
   export let selected = "BASE";
+  /**
+   * @type {any}
+   */
+  export let plannedSemester = 0;
   let id = "moduletype_" + short;
   let ps = "plannedsemester_" + short;
 </script>
@@ -31,5 +35,6 @@
     placeholder="1-6"
     min="1"
     max="6"
+    value={plannedSemester > 0 ? plannedSemester : ""}
   />
 </div>
