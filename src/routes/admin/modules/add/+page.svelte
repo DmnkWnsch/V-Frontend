@@ -4,8 +4,6 @@
   export let form;
 
   import Exam from "../components/exam.svelte";
-  import Moduleedit from "../components/moduleedit.svelte";
-  //import Moduleedit from "./components/moduleedit.svelte";
   import Moduletype from "../components/moduletype.svelte";
 
   let examCount = 1;
@@ -27,6 +25,13 @@
     <div class="alert alert-success" role="alert">
       Das Modul {form?.id} - {form?.name} wurde erfolgreich gespeichert!
     </div>
+  {:else if form?.error}
+    <div class="alert alert-danger" role="alert">
+      <b>Es ist ein Fehler aufgetreten!</b><br />
+      {#if form?.message}
+        {form?.message}
+      {/if}
+    </div>
   {/if}
 
   <form action="?/saveModule" method="POST" class="row g-3">
@@ -39,26 +44,33 @@
         class="form-control"
         id="modulename"
         placeholder="XYZ"
+        required
       />
     </div>
     <div class="col-sm-6">
       <label for="moduleId" class="form-label">Modul-ID</label>
       <input
         name="moduleid"
-        type="text"
+        type="number"
         class="form-control"
         id="moduleId"
         placeholder="012345"
+        required
+        min="100000"
+        max="999999"
       />
     </div>
     <div class="col-sm-6">
       <label for="credits" class="form-label">Credits</label>
       <input
         name="credits"
-        type="text"
+        type="number"
         class="form-control"
         id="credits"
         placeholder="3"
+        required
+        min="1"
+        max="99"
       />
     </div>
 

@@ -22,5 +22,14 @@
 </div>
 <div class="col-sm-4">
   <label for={ps} class="form-label">Geplantes Semester</label>
-  <input name={ps} type="text" class="form-control" id={ps} placeholder="1-6" />
+  <input
+    required
+    name={ps}
+    type="number"
+    class="form-control"
+    id={ps}
+    placeholder="1-6"
+    min="1"
+    max="6"
+  />
 </div>
