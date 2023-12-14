@@ -32,17 +32,39 @@ const deleteModule = async (data) => {
   console.log(data);
   const moduleId = data.get("moduleid");
 
-  const deleteReq = await fetch(consts.API_URL + "/modules/" + moduleId, {
+  const deleteModuleReq = await fetch(consts.API_URL + "/modules/" + moduleId, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
   });
-  const deleteRes = await deleteReq.json();
+  const deleteRes = await deleteModuleReq.json();
 
-  if (deleteReq.status != 200) {
+  if (deleteModuleReq.status != 200) {
     return { error: true, message: deleteRes.message };
   }
+
+  const deleteCourseTypesReq = await fetch(
+    consts.API_URL + "/modules/" + moduleId + "/course-types",
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const deleteCourseTypesRes = await deleteCourseTypesReq.json();
+
+  const deleteExamsReq = await fetch(
+    consts.API_URL + "/modules/" + moduleId + "/exams",
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const deleteExamsRes = await deleteExamsReq.json();
 
   return { success: true, id: moduleId };
 };
