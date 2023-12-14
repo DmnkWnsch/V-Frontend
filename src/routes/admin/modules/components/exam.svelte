@@ -1,6 +1,7 @@
 <script>
   export let id;
   export let selected = "WRITTEN";
+  export let last = false;
   let exam = "" + id;
   let divId = "exam" + id;
   let examtype = "examtype" + id;
@@ -22,4 +23,8 @@
     <option value="TASKS">Prüfungsvorleistung</option>
   </select>
 </div>
-<div class="col-4-sm"></div>
+<div class="col-sm-4 d-flex align-items-end">
+  {#if last}
+    <button type="button" class="btn btn-danger" on:click>Entfernen</button>
+  {/if}
+</div>

@@ -12,7 +12,9 @@
     examCount = examCount + 1;
   };
 
-  let selected = "";
+  const removeExam = () => {
+    examCount = examCount - 1;
+  };
 </script>
 
 <svelte:head>
@@ -76,7 +78,11 @@
 
     <div class="col-12 fs-5 mt-5">Modulprüfungen</div>
     {#each Array(examCount) as _, index (index)}
-      <Exam id={index + 1} />
+      {#if index + 1 == examCount && examCount > 1}
+        <Exam id={index + 1} last={true} on:click={removeExam} />
+      {:else}
+        <Exam id={index + 1} />
+      {/if}
     {/each}
     <div class="col-12">
       <button on:click={addExam} type="button" class="btn btn-success btn-sm"
