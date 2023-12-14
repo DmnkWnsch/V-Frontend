@@ -1,4 +1,5 @@
 <script>
+  export let form;
   export let data;
 
   import Moduleedit from "../components/moduleedit.svelte";
@@ -12,6 +13,19 @@
 </svelte:head>
 
 <div class="container bg-body-tertiary border my-4 p-3 shadow-sm">
+  {#if form?.success}
+    <div class="alert alert-success" role="alert">
+      Das Modul {form?.id} wurde erfolgreich gelöscht!
+    </div>
+  {:else if form?.error}
+    <div class="alert alert-danger" role="alert">
+      <b>Es ist ein Fehler aufgetreten!</b><br />
+      {#if form?.message}
+        {form?.message}
+      {/if}
+    </div>
+  {/if}
+
   <form action="?/saveModule" method="POST" class="row g-3">
     <div class="col-12 fs-5">Modul bearbeiten</div>
 

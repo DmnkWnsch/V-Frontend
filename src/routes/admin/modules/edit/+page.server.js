@@ -22,7 +22,7 @@ export const actions = {
     // Action determines if the module should be deleted or modified
     const action = data.get("action");
     if (action === "delete") {
-      deleteModule(data);
+      return await deleteModule(data);
     }
   },
 };
@@ -31,5 +31,18 @@ export const actions = {
 const deleteModule = async (data) => {
   console.log(data);
   const moduleId = data.get("moduleid");
-  console.log("deleting " + moduleId);
+
+  const deleteReq = await fetch(consts.API_URL + "/modules/" + moduleId, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const deleteRes = await deleteReq.json();
+
+  if (deleteReq.status != 200) {
+    return { error: true, message: deleteRes.message };
+  }
+
+  return { success: true, id: moduleId };
 };
