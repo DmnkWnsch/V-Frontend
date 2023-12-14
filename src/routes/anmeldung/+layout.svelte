@@ -1,3 +1,4 @@
+<<<<<<<< 5349fa9c3fab7d958c42bd5f8badf4cb12b65954:src/routes/anmeldung/+layout.svelte
 <script>
 // @ts-nocheck
 
@@ -50,3 +51,6 @@
 		box-sizing: border-box;
 	}
 </style>
+========
+<slot />
+>>>>>>>> d57a050681f18b8ddac3bed14400334e640ef5ae:src/routes/+layout.svelte
