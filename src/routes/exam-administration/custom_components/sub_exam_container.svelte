@@ -1,11 +1,9 @@
 <script>
+// @ts-nocheck
+
   // import sveltestrap components
     import {
         Container,
-        Card,
-        CardBody,
-        CardHeader,
-        CardTitle,
         Row,
         Col,
         Button

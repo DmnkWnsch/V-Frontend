@@ -1,3 +1,4 @@
+<<<<<<<< 5349fa9c3fab7d958c42bd5f8badf4cb12b65954:src/routes/anmeldung/+layout.svelte
 <script>
 // @ts-nocheck
 
@@ -18,7 +19,7 @@
 		<Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
 		  <Nav class="ms-auto" navbar>
 			<NavItem>
-			  <NavLink href="/anmeldung">Anmeldung</NavLink>
+			  <NavLink href="/" active>Prüfungsanmeldung</NavLink>
 			</NavItem>
 			<NavItem>
 			  <NavLink href="/exam-administration">Leistungsübersicht</NavLink>
@@ -50,3 +51,6 @@
 		box-sizing: border-box;
 	}
 </style>
+========
+<slot />
+>>>>>>>> d57a050681f18b8ddac3bed14400334e640ef5ae:src/routes/+layout.svelte
