@@ -8,29 +8,6 @@
    */
   export let id;
 
-  const courses = [
-    {
-      id: 1,
-      name: "Eingebettete Systeme",
-      shortName: "embedded",
-    },
-    {
-      id: 2,
-      name: "Medieninformatik",
-      shortName: "media",
-    },
-    {
-      id: 3,
-      name: "Verteilte Systeme",
-      shortName: "distri",
-    },
-    {
-      id: 4,
-      name: "Computergraphik",
-      shortName: "gc",
-    },
-  ];
-
   const loadExamsForModule = async () => {
     const examsReq = await fetch(consts.API_URL + "/modules/" + id + "/exams", {
       method: "GET",
@@ -98,7 +75,7 @@
 {:then data}
   <Exam id="1" selected={data.exams[0]?.type ?? ""} />
 
-  {#each courses as c}
+  {#each consts.courses as c}
     {#each data.courseTypes as ct}
       {#if ct.course_id == c.id}
         <Moduletype name={c.name} short={c.shortName} selected={ct.type} />
