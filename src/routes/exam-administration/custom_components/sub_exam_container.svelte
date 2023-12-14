@@ -1,15 +1,19 @@
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
   // import sveltestrap components
-    import {
-        Container,
-        Row,
-        Col,
-        Button
-        } from 'sveltestrap';
+  import {
+    Container,
+    Row,
+    Col,
+    Button,
+    Card,
+    CardHeader,
+    CardTitle,
+    CardBody,
+  } from "sveltestrap";
 
-    export let data;
+  export let data;
 </script>
 
 <Card>
@@ -18,7 +22,7 @@
   </CardHeader>
   <CardBody>
     <Row cols={2} class="py-1">
-      <Col sm={{ size: 10 , offset: 0 }} >
+      <Col sm={{ size: 10, offset: 0 }}>
         <Row cols={2}>
           <Col>
             <Row cols={2}>
@@ -50,28 +54,30 @@
           </Col>
           <Col>
             <Row cols={2}>
-          <Col>
-            <b>Semester der Leistung:</b>
-          </Col>
-          <Col>
-            {data["semester"]}
-          </Col>
-          <Col>
-            <p><b>Prüfer:</b></p>
-          </Col>
-          <Col>
-            {data["examiners"]}
-          </Col>
+              <Col>
+                <b>Semester der Leistung:</b>
+              </Col>
+              <Col>
+                {data["semester"]}
+              </Col>
+              <Col>
+                <p><b>Prüfer:</b></p>
+              </Col>
+              <Col>
+                {data["examiners"]}
+              </Col>
             </Row>
           </Col>
         </Row>
       </Col>
-      <Col sm={{ size: 2 , offset: 0 }} >
-        <Container class="h-100 d-flex justify-content-center align-items-center">
+      <Col sm={{ size: 2, offset: 0 }}>
+        <Container
+          class="h-100 d-flex justify-content-center align-items-center"
+        >
           <Button class="bg-success border border-0">Wiederholen</Button>
         </Container>
       </Col>
     </Row>
   </CardBody>
 </Card>
-<br/>
+<br />

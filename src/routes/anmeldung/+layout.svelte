@@ -1,56 +1,66 @@
-<<<<<<<< 5349fa9c3fab7d958c42bd5f8badf4cb12b65954:src/routes/anmeldung/+layout.svelte
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
-	import '../styles.css';
-	import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,Dropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'sveltestrap';
+  import "../styles.css";
+  import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+  } from "sveltestrap";
 
-	let isOpen = false;
+  let isOpen = false;
   // @ts-ignore
-  	function handleUpdate(event) {
-    	isOpen = event.detail.isOpen;
- 	}
+  function handleUpdate(event) {
+    isOpen = event.detail.isOpen;
+  }
 </script>
 
 <div class="app">
-	<Navbar style="background-color: #0e4e3f" dark expand="md">
-		<NavbarBrand>Prüfungsverwaltung</NavbarBrand>
-		<NavbarToggler on:click={() => (isOpen = !isOpen)} />
-		<Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
-		  <Nav class="ms-auto" navbar>
-			<NavItem>
-			  <NavLink href="/" active>Prüfungsanmeldung</NavLink>
-			</NavItem>
-			<NavItem>
-			  <NavLink href="/exam-administration">Leistungsübersicht</NavLink>
-			</NavItem>
-		  </Nav>
-		</Collapse>
-	  </Navbar>
+  <Navbar style="background-color: #0e4e3f" dark expand="md">
+    <NavbarBrand>Prüfungsverwaltung</NavbarBrand>
+    <NavbarToggler on:click={() => (isOpen = !isOpen)} />
+    <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
+      <Nav class="ms-auto" navbar>
+        <NavItem>
+          <NavLink href="/" active>Prüfungsanmeldung</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="/exam-administration">Leistungsübersicht</NavLink>
+        </NavItem>
+      </Nav>
+    </Collapse>
+  </Navbar>
 
-	<main>
-		<slot />
-	</main>
+  <main>
+    <slot />
+  </main>
 </div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-</style>
 ========
 <slot />
->>>>>>>> d57a050681f18b8ddac3bed14400334e640ef5ae:src/routes/+layout.svelte
+
+<style>
+  .app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 100%;
+    max-width: 64rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+</style>

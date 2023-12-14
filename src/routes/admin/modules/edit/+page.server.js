@@ -1,3 +1,4 @@
+// @ts-nocheck
 import consts from "../../../../consts";
 
 /** @type {import('./$types').PageServerLoad} */
