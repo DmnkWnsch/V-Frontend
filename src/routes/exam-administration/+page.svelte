@@ -25,6 +25,9 @@
 // import custom components
   import Exam_container from './custom_components/exam_container.svelte';
 
+  import { enhance } from "$app/forms";
+
+
   let exam_data_mathematics_3 = {
 	"name"		:	"Mathematik III",
 	"tags"		:	[ "schriftlich" , "PVL" ],
@@ -81,6 +84,7 @@
 	console.log(filter_options);
   }
 
+  export let data;
 
 </script>
 
@@ -136,7 +140,7 @@
 			<Col>
 				<h4><b>Bewertung:</b></h4>
 			</Col>
-			<Col>2.49</Col>
+			<Col>{data.results[0]["grade"]}</Col>
 		</Row>
 		<Row cols={2}>
 			<Col>
