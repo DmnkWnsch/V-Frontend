@@ -12,6 +12,7 @@ export async function load({ params }) {
   const memberResRes = await memberResReq.json();
   console.log(memberResRes);
   return {
-    results: memberResRes
+    results: memberResRes,
+    overall_result : memberResRes.reduce((total, next) => total + next["grade"], 0) / memberResRes.length
   };
 }

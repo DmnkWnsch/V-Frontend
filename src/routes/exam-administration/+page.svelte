@@ -140,7 +140,7 @@
 			<Col>
 				<h4><b>Bewertung:</b></h4>
 			</Col>
-			<Col>{data.results[0]["grade"]}</Col>
+			<Col>{data.overall_results}</Col>
 		</Row>
 		<Row cols={2}>
 			<Col>
