@@ -13,7 +13,7 @@ export async function load({ params }) {
   let overall_result = memberResRes.reduce((total, next) => total + next["grade"], 0) / memberResRes.length;
   // iterate over results and append missing information
   for ( let i = 0 ; i < memberResRes.length ; i++ ) {
-    // add module name
+    // add module data
     const memberResultModuleReq = await fetch(consts.API_URL + "/modules/" + memberResRes[i]["module_id"], {
       method: "GET",
       headers: {
@@ -22,38 +22,42 @@ export async function load({ params }) {
     });
     let memberResultModuleRes = await memberResultModuleReq.json();
     memberResultModuleRes = memberResultModuleRes[0];
-    console.log(memberResultModuleRes);
+    // add exam data
+    const memberResultExamReq = await fetch(consts.API_URL + "/exams", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    let memberResultExamRes = await memberResultExamReq.json();
+    memberResultExamRes = memberResultExamRes.filter(function (el) {
+      return  el["id"] == memberResRes[i]["exam_id"];
+    })[0];
+    let exam_types = {
+      "WRITTEN" : "schriftlich",
+      "TASKS"   : "PVL",
+      "OPAL"    : "online"
+    };
+
     memberResRes[i] = {
       "name"		:	memberResultModuleRes["name"],
-      "tags"		:	[ "schriftlich" , "PVL" ],
+      "tags"		:	[ exam_types[ memberResultExamRes["type"] ] ],
       "points"	:	memberResultModuleRes["credits"],
       "id"		  : memberResultModuleRes["id"],
       "sub_exams"	:	[
         {
-          "name"			:	"Aufgabenkomplexe",
-          "type"			:	"Prüfungsvorleistung",
-          "result"		:	"bestanden",
-          "points"		:	3,
-          "date"			:	"Wintersemester 2023",
-          "exam_content"	:	"Abgabe von Übungsaufgaben",
-          "semester"		:	"Wintersemester 2022",
-          "examiners"		:	"Max Mustermann, Hermann Mann, Christian Franz"
-        },
-        {
           "name"			:	"",
-          "type"			:	"Schriftiliche Prüfung",
-          "result"		:	1.0,
-          "points"		:	6,
+          "type"			:	"Schriftliche Prüfung",
+          "result"		:	memberResRes[i]["grade"],
+          "points"		:	memberResultModuleRes["credits"],
           "date"			:	"07.02.2023",
-          "exam_content"	:	"schriftlich",
+          "exam_content"	:	exam_types[ memberResultExamRes["type"] ],
           "semester"		:	"Wintersemester 2022",
           "examiners"		:	"Max Mustermann, Hermann Mann, Christian Franz"
         }
       ]
     };
   }
-  console.log("test");
-  console.log(memberResRes[0]);
   return {
     results: memberResRes,
     overall_result : overall_result
