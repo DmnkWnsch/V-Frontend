@@ -6,6 +6,8 @@
   const navElements = {
     Module: "/admin/modules",
     Noten: "/admin/grades",
+    Prüfungsverwaltung: "/admin/exams",
+    Studentenverwaltung: "/admin/students",
   };
 </script>
 
@@ -16,7 +18,7 @@
     style="background-color: #660000"
   >
     <div class="container-fluid">
-      <span class="navbar-brand">Prüfungsverwaltung Admin</span>
+      <span class="navbar-brand">Administration</span>
       <button
         class="navbar-toggler"
         type="button"
