@@ -119,10 +119,10 @@
         id={index + 1}
         last={true}
         on:click={removeExam}
-        selected={data.exams[index]?.type ?? ""}
+        selected={data.exams[index]?.type ?? "WRITTEN"}
       />
     {:else}
-      <Exam id={index + 1} selected={data.exams[0]?.type ?? ""} />
+      <Exam id={index + 1} selected={data.exams[index]?.type ?? "WRITTEN"} />
     {/if}
   {/each}
   {#if examCount > 0}
