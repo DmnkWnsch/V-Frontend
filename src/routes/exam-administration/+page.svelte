@@ -25,34 +25,8 @@
 // import custom components
   import Exam_container from './custom_components/exam_container.svelte';
 
-  let exam_data_mathematics_3 = {
-	"name"		:	"Mathematik III",
-	"tags"		:	[ "schriftlich" , "PVL" ],
-	"points"	:	9,
-	"id"		:	200003,
-	"sub_exams"	:	[
-		{
-			"name"			:	"Aufgabenkomplexe",
-			"type"			:	"Prüfungsvorleistung",
-			"result"		:	"bestanden",
-			"points"		:	3,
-			"date"			:	"Wintersemester 2023",
-			"exam_content"	:	"Abgabe von Übungsaufgaben",
-			"semester"		:	"Wintersemester 2022",
-			"examiners"		:	"Max Mustermann, Hermann Mann, Christian Franz"
-		},
-		{
-			"name"			:	"",
-			"type"			:	"Schriftiliche Prüfung",
-			"result"		:	1.0,
-			"points"		:	6,
-			"date"			:	"07.02.2023",
-			"exam_content"	:	"schriftlich",
-			"semester"		:	"Wintersemester 2022",
-			"examiners"		:	"Max Mustermann, Hermann Mann, Christian Franz"
-		}
-	]
-  };
+  import { enhance } from "$app/forms";
+
 
   let filter_options = {
 	"anwendungsschwerpunkt"	:	"Medieninformatik",
@@ -81,6 +55,9 @@
 	console.log(filter_options);
   }
 
+  export let data = {
+	results	:	[]
+  };
 
 </script>
 
@@ -136,13 +113,13 @@
 			<Col>
 				<h4><b>Bewertung:</b></h4>
 			</Col>
-			<Col>2.49</Col>
+			<Col>{data.overall_result}</Col>
 		</Row>
 		<Row cols={2}>
 			<Col>
 				<h4><b>Leistungspunkte:</b></h4>
 			</Col>
-			<Col>113</Col>
+			<Col>{data.total_points}</Col>
 		</Row>
 	</Row>
 </Container>
@@ -229,13 +206,11 @@
 </Container>
 
 <Container>
-	<div class="mt-5">
-		<svelte:component this={Exam_container} active="true" data={exam_data_mathematics_3}/>
-	</div>
-	
-	<div class="mt-5">
-		<svelte:component this={Exam_container} active="false" data={exam_data_mathematics_3}/>
-	</div>
+	{#each data.results as result}
+		<div class="mt-5">
+			<svelte:component this={Exam_container} active="true" data={result}/>
+		</div>
+    {/each}
 </Container>
 
 
