@@ -33,25 +33,31 @@ export async function load({ params }) {
     memberResultExamRes = memberResultExamRes.filter(function (el) {
       return  el["id"] == memberResRes[i]["exam_id"];
     })[0];
-    let exam_types = {
+    console.log(memberResultExamRes);
+    let exam_types_short = {
       "WRITTEN" : "schriftlich",
       "TASKS"   : "PVL",
       "OPAL"    : "online"
     };
+    let exam_types_long = {
+      "WRITTEN" : "Schriftlich Prüfung",
+      "TASKS"   : "Prüfungsvorleistung",
+      "OPAL"    : "Onlineklausur"
+    };
 
     memberResRes[i] = {
       "name"		:	memberResultModuleRes["name"],
-      "tags"		:	[ exam_types[ memberResultExamRes["type"] ] ],
+      "tags"		:	( typeof memberResultExamRes === 'undefined' ) ? "" : [ exam_types_short[ memberResultExamRes["type"] ] ],
       "points"	:	memberResultModuleRes["credits"],
       "id"		  : memberResultModuleRes["id"],
       "sub_exams"	:	[
         {
           "name"			:	"",
-          "type"			:	"Schriftliche Prüfung",
+          "type"			:	( typeof memberResultExamRes === 'undefined' ) ? "" : exam_types_long[ memberResultExamRes["type"] ],
           "result"		:	memberResRes[i]["grade"],
           "points"		:	memberResultModuleRes["credits"],
           "date"			:	"07.02.2023",
-          "exam_content"	:	exam_types[ memberResultExamRes["type"] ],
+          "exam_content"	:	( typeof memberResultExamRes === 'undefined' ) ? "" : exam_types_long[ memberResultExamRes["type"] ],
           "semester"		:	"Wintersemester 2022",
           "examiners"		:	"Max Mustermann, Hermann Mann, Christian Franz"
         }
