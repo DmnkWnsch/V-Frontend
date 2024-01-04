@@ -119,7 +119,7 @@
 			<Col>
 				<h4><b>Leistungspunkte:</b></h4>
 			</Col>
-			<Col>113</Col>
+			<Col>{data.total_points}</Col>
 		</Row>
 	</Row>
 </Container>

@@ -11,6 +11,7 @@ export async function load({ params }) {
   });
   let memberResRes = await memberResReq.json();
   let overall_result = memberResRes.reduce((total, next) => total + parseFloat(next["grade"]), 0) / memberResRes.length;
+  let total_points = 0;
   // iterate over results and append missing information
   for ( let i = 0 ; i < memberResRes.length ; i++ ) {
     // add module data
@@ -63,9 +64,12 @@ export async function load({ params }) {
         }
       ]
     };
+
+    total_points += memberResultModuleRes["credits"];
   }
   return {
     results: memberResRes,
-    overall_result : overall_result
+    overall_result : overall_result,
+    total_points  : total_points
   };
 }
