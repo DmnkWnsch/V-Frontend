@@ -1,6 +1,7 @@
 <script>
   // @ts-nocheck
 
+  import StudentNavbar from "../StudentNavbar.svelte";
   import "../styles.css";
   import {
     Collapse,
@@ -24,7 +25,8 @@
 </script>
 
 <div class="app">
-  <Navbar style="background-color: #0e4e3f" dark expand="md">
+  <StudentNavbar />
+  <!--<Navbar style="background-color: #0e4e3f" dark expand="md">
     <NavbarBrand>Prüfungsverwaltung</NavbarBrand>
     <NavbarToggler on:click={() => (isOpen = !isOpen)} />
     <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
@@ -37,13 +39,14 @@
         </NavItem>
       </Nav>
     </Collapse>
-  </Navbar>
+  </Navbar>-->
 
   <main>
     <slot />
   </main>
 </div>
 ========
+
 <!--<slot />-->
 
 <style>
