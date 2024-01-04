@@ -44,7 +44,7 @@
   </main>
 </div>
 ========
-<slot />
+<!--<slot />-->
 
 <style>
   .app {
