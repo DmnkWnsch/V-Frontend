@@ -21,6 +21,8 @@
     <option value="WRITTEN">schriftliche Prüfung</option>
     <option value="ORAL">mündliche Prüfung</option>
     <option value="TASKS">Prüfungsvorleistung</option>
+    <option value="LABORATORY">Praktikum</option>
+    <option value="SEMINAR_PAPER">Hausarbeit</option>
   </select>
 </div>
 <div class="col-sm-4 d-flex align-items-end">
