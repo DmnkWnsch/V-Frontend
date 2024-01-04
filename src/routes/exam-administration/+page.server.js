@@ -10,7 +10,7 @@ export async function load({ params }) {
     },
   });
   let memberResRes = await memberResReq.json();
-  let overall_result = memberResRes.reduce((total, next) => total + next["grade"], 0) / memberResRes.length;
+  let overall_result = memberResRes.reduce((total, next) => total + parseFloat(next["grade"]), 0) / memberResRes.length;
   // iterate over results and append missing information
   for ( let i = 0 ; i < memberResRes.length ; i++ ) {
     // add module data
