@@ -34,7 +34,6 @@ export async function load({ params }) {
     memberResultExamRes = memberResultExamRes.filter(function (el) {
       return  el["id"] == memberResRes[i]["exam_id"];
     })[0];
-    console.log(memberResultExamRes);
     let exam_types_short = {
       "WRITTEN" : "schriftlich",
       "TASKS"   : "PVL",
@@ -46,11 +45,14 @@ export async function load({ params }) {
       "OPAL"    : "Onlineklausur"
     };
 
+    console.log(memberResRes);
+
     memberResRes[i] = {
       "name"		:	memberResultModuleRes["name"],
       "tags"		:	( typeof memberResultExamRes === 'undefined' ) ? "" : [ exam_types_short[ memberResultExamRes["type"] ] ],
       "points"	:	memberResultModuleRes["credits"],
       "id"		  : memberResultModuleRes["id"],
+      "status"  : memberResRes[i]["status"],
       "sub_exams"	:	[
         {
           "name"			:	"",
