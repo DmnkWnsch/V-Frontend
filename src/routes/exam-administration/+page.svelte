@@ -217,7 +217,7 @@
   {#each data.results as result}
 	{#if filter_options["only_new_exams"] == false || result["status"] != "passed" }
 		<div class="mt-5">
-		<svelte:component this={Exam_container} active="true" data={result} />
+		<svelte:component this={Exam_container} active="false" data={result} />
 		</div>
 	{/if}
   {/each}
