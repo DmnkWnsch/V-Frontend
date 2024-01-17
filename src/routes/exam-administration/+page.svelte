@@ -29,12 +29,19 @@
 
   let filter_options = {
     anwendungsschwerpunkt: "Medieninformatik",
-    modulart: "Basismodule",
+    modulart: "Alle",
     semester: 3,
     only_new_exams: false,
   };
   let search_text_input = ""
   let search_text = "";
+
+  let exam_types = {
+    "Alle"                  : "ALL",
+    "Basismodule"           : "BASE",
+    "Anwendungsschwerpunkt" : "ADDITIONAL",
+    "Schlüsselkompetenzen"  : "KEY_COMPETENCE"
+  };
 
   function search() {
     search_text = search_text_input;
@@ -176,17 +183,16 @@
             <DropdownToggle caret>{filter_options["modulart"]}</DropdownToggle>
             <DropdownMenu>
               <DropdownItem header>Modulart</DropdownItem>
+              <DropdownItem on:click={() => filter_modulart("Alle")}
+                >Alle</DropdownItem>
               <DropdownItem on:click={() => filter_modulart("Basismodule")}
-                >Basismodule</DropdownItem
-              >
+                >Basismodule</DropdownItem>
               <DropdownItem
                 on:click={() => filter_modulart("Anwendungsschwerpunkt")}
-                >Anwendungsschwerpunkt</DropdownItem
-              >
+                >Anwendungsschwerpunkt</DropdownItem>
               <DropdownItem
                 on:click={() => filter_modulart("Schlüsselkompetenzen")}
-                >Schlüsselkompetenzen</DropdownItem
-              >
+                >Schlüsselkompetenzen</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </Col>
@@ -223,8 +229,10 @@
 
 <Container>
   {#each data.results as result}
-  <!-- filter only new exams                                                              search -->
-	{#if ( filter_options["only_new_exams"] == false || result["status"] != "passed" ) && ( search_text == "" || result["name"].includes(search_text) ) }
+  <!-- filter only new exams, search, moduletype, planned semester for module-->
+	{#if ( filter_options["only_new_exams"] == false || result["status"] != "passed" )
+    && ( search_text == "" || result["name"].includes(search_text) )
+    && ( filter_options["modulart"] == "Alle" || result["type"] == exam_types[ filter_options["modulart"] ] ) }
 		<div class="mt-5">
 		<svelte:component this={Exam_container} active="false" data={result} />
 		</div>
