@@ -30,7 +30,7 @@
   let filter_options = {
     anwendungsschwerpunkt: "Medieninformatik",
     modulart: "Alle",
-    semester: 3,
+    semester: "Alle",
     only_new_exams: false,
   };
   let search_text_input = ""
@@ -58,7 +58,6 @@
   }
   function filter_semester(s) {
     filter_options["semester"] = s;
-    console.log(filter_options);
   }
 
   export let data = {
@@ -204,6 +203,7 @@
             <DropdownToggle caret>{filter_options["semester"]}</DropdownToggle>
             <DropdownMenu>
               <DropdownItem header>Semester</DropdownItem>
+              <DropdownItem on:click={() => filter_semester("Alle")}>Alle</DropdownItem>
               <DropdownItem on:click={() => filter_semester(1)}>1</DropdownItem>
               <DropdownItem on:click={() => filter_semester(2)}>2</DropdownItem>
               <DropdownItem on:click={() => filter_semester(3)}>3</DropdownItem>
@@ -232,7 +232,8 @@
   <!-- filter only new exams, search, moduletype, planned semester for module-->
 	{#if ( filter_options["only_new_exams"] == false || result["status"] != "passed" )
     && ( search_text == "" || result["name"].includes(search_text) )
-    && ( filter_options["modulart"] == "Alle" || result["type"] == exam_types[ filter_options["modulart"] ] ) }
+    && ( filter_options["modulart"] == "Alle" || result["type"] == exam_types[ filter_options["modulart"] ] )
+    && ( filter_options["semester"] == "Alle" || result["planned_semester"] == filter_options["semester"] ) }
 		<div class="mt-5">
 		<svelte:component this={Exam_container} active="false" data={result} />
 		</div>
