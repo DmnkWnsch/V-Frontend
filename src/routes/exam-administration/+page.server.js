@@ -10,7 +10,8 @@ export async function load({ params }) {
     },
   });
   let memberResRes = await memberResReq.json();
-  let overall_result = memberResRes.reduce((total, next) => total + parseFloat(next["grade"]), 0) / memberResRes.length;
+  let exams_passed = memberResRes.filter(item => item["status"] == "passed");
+  let overall_result = exams_passed.reduce((total, next) => total + parseFloat(next["grade"]), 0) / exams_passed.length;
   let total_points = 0;
   // iterate over results and append missing information
   for ( let i = 0 ; i < memberResRes.length ; i++ ) {
@@ -67,7 +68,9 @@ export async function load({ params }) {
       ]
     };
 
-    total_points += memberResultModuleRes["credits"];
+    if ( memberResRes[i]["status"] == "passed" ) {
+      total_points += memberResultModuleRes["credits"];
+    }
   }
   return {
     results: memberResRes,
