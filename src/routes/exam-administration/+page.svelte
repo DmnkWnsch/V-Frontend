@@ -33,8 +33,12 @@
     semester: 3,
     only_new_exams: false,
   };
+  let search_text_input = ""
+  let search_text = "";
 
-  function search() {}
+  function search() {
+    search_text = search_text_input;
+  }
 
   function filter() {}
 
@@ -114,14 +118,13 @@
       <Row cols={2}>
         <Col sm={{ size: 6, offset: 4 }}>
           <InputGroup>
-            <Input placeholder="Prüfung finden" />
+            <Input bind:value={search_text_input} placeholder="Prüfung finden" />
             <Button on:click={search}>Suchen</Button>
           </InputGroup>
         </Col>
         <Col sm={{ size: 1, offset: 0 }}>
           <Button class="bg-info border border-0" on:click={filter}
-            >Filter</Button
-          >
+            >Filter</Button>
         </Col>
       </Row>
     </Col>
@@ -220,7 +223,8 @@
 
 <Container>
   {#each data.results as result}
-	{#if filter_options["only_new_exams"] == false || result["status"] != "passed" }
+  <!-- filter only new exams                                                              search -->
+	{#if ( filter_options["only_new_exams"] == false || result["status"] != "passed" ) && ( search_text == "" || result["name"].includes(search_text) ) }
 		<div class="mt-5">
 		<svelte:component this={Exam_container} active="false" data={result} />
 		</div>

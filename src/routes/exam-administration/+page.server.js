@@ -46,8 +46,6 @@ export async function load({ params }) {
       "OPAL"    : "Onlineklausur"
     };
 
-    console.log(memberResRes);
-
     memberResRes[i] = {
       "name"		:	memberResultModuleRes["name"],
       "tags"		:	( typeof memberResultExamRes === 'undefined' ) ? "" : [ exam_types_short[ memberResultExamRes["type"] ] ],
