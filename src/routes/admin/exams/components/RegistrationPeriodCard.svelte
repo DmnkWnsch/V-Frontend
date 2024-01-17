@@ -17,6 +17,11 @@
    */
   export let id;
 
+  /**
+   * @type {any}
+   */
+  export let index;
+
   let editable = false;
 
   const changeEditable = () => {
@@ -42,7 +47,7 @@
     currentDate < endDateObject.getTime();
 </script>
 
-<div class="card">
+<div class={index == 0 ? "card" : "card mt-3"}>
   <div class="card-body">
     <h5 class="card-title">
       {#if activePeriod}

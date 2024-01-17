@@ -27,6 +27,26 @@ export const actions = {
       deletePeriod(data);
     }
   },
+  addPeriod: async ({ cookies, request }) => {
+    const data = await request.formData();
+
+    const periodData = {
+      name: data.get("period_name"),
+      start_date: data.get("start_date"),
+      end_date: data.get("end_date"),
+    };
+
+    const addPeriodReq = await fetch(
+      consts.API_URL + "/registration-periods/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(periodData),
+      }
+    );
+  },
 };
 
 const savePeriod = async (formData) => {
