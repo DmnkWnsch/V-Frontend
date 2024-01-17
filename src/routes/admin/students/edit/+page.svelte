@@ -38,6 +38,22 @@
 </svelte:head>
 
 <div class="container bg-light-subtle border my-4 p-3 shadow-sm">
+  {#if form?.success}
+    <MessageBanner type="success">
+      Student mit Matrikelnummer {form?.id} wurde erfolgreich gespeichert!
+    </MessageBanner>
+  {/if}
+  {#if form?.error}
+    <MessageBanner type="error">
+      {form?.message}
+    </MessageBanner>
+  {/if}
+  {#if form?.deleted}
+    <MessageBanner type="success">
+      Student mit Matrikelnummer {form?.id} wurde erfolgreich gelöscht!
+    </MessageBanner>
+  {/if}
+
   <div class="row g-3">
     <div class="col-12 fs-5">Studierenden bearbeiten</div>
     <div class="col-12">

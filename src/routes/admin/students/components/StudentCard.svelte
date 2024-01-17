@@ -29,7 +29,7 @@
         <button
           on:click={changeEditStudent}
           class={editStudent ? "btn btn-secondary" : "btn btn-success"}
-          >{editStudent ? "Schließen" : "Hinzufügen"}</button
+          >{editStudent ? "Schließen" : "Bearbeiten"}</button
         >
       </div>
     </div>
@@ -73,10 +73,14 @@
             </select>
           </div>
           <div class="col col-lg-3 d-flex align-items-end">
-            <button class="btn btn-success w-100">Speichern</button>
+            <button class="btn btn-success w-100" name="action" value="save"
+              >Speichern</button
+            >
           </div>
           <div class="col col-lg-3 d-flex align-items-end">
-            <button class="btn btn-danger w-100">Löschen</button>
+            <button class="btn btn-danger w-100" name="action" value="delete"
+              >Löschen</button
+            >
           </div>
         </div>
       </form>
