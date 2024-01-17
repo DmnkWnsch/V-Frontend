@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-  <title>PV-A Prüfungsverwaltung</title>
+  <title>PV-A Studierendenverwaltung</title>
   <meta name="description" content="About this app" />
 </svelte:head>
 
