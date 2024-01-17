@@ -18,5 +18,18 @@ export const actions = {
       },
       body: JSON.stringify(newStudent),
     });
+    const addStudentRes = await addStudentReq.json();
+    const studentData = addStudentRes.data;
+
+    if (addStudentReq.status == 201) {
+      return {
+        success: true,
+        last_name: studentData.lastName,
+        first_name: studentData.name,
+        id: studentData.id,
+      };
+    } else {
+      return { error: true, message: addStudentRes.message };
+    }
   },
 };

@@ -1,9 +1,27 @@
+<script>
+  import MessageBanner from "../../components/MessageBanner.svelte";
+  export let form;
+</script>
+
 <svelte:head>
   <title>PV-A Prüfungsverwaltung</title>
   <meta name="description" content="About this app" />
 </svelte:head>
 
 <div class="container bg-light-subtle border my-4 p-3 shadow-sm">
+  {#if form?.success}
+    <MessageBanner type="success">
+      Studierender <b>'{form?.last_name}, {form?.first_name}'</b> wurde mit
+      MatrikelNr.
+      <b>{form?.id}</b>
+      erstellt!
+    </MessageBanner>
+  {/if}
+  {#if form?.error}
+    <MessageBanner type="error">
+      {form?.message}
+    </MessageBanner>
+  {/if}
   <form action="?/addStudent" method="POST" class="row g-3">
     <div class="col-12 fs-5">Neuen Studierenden hinzufügen</div>
     <div class="col-sm-4">
