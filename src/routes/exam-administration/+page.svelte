@@ -23,7 +23,7 @@
   } from "sveltestrap";
 
   // import custom components
-  import Exam_container from "./custom_components/exam_container.svelte";
+  import Exam_container from "./exam-container/exam_container.svelte";
 
   import { enhance } from "$app/forms";
 
@@ -54,6 +54,11 @@
     results: [],
   };
 </script>
+
+<style>
+  @import './style.css';
+</style>
+
 
 <svelte:head>
   <title>Prüfungsverwaltung</title>
@@ -222,19 +227,3 @@
 	{/if}
   {/each}
 </Container>
-
-<style>
-  .nav_bar {
-    background-color: #005f50;
-  }
-  .span_white {
-    color: white;
-  }
-
-  :global(.nav_link) {
-    background-color: rgb(255 255 255 / 25%) !important;
-  }
-  :global(.bg_grey_1) {
-    background-color: rgb(0 0 0 / 15%) !important;
-  }
-</style>
