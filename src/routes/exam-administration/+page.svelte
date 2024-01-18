@@ -23,18 +23,29 @@
   } from "sveltestrap";
 
   // import custom components
-  import Exam_container from "./custom_components/exam_container.svelte";
+  import Exam_container from "./exam-container/exam_container.svelte";
 
   import { enhance } from "$app/forms";
 
   let filter_options = {
     anwendungsschwerpunkt: "Medieninformatik",
-    modulart: "Basismodule",
-    semester: 3,
+    modulart: "Alle",
+    semester: "Alle",
     only_new_exams: false,
   };
+  let search_text_input = ""
+  let search_text = "";
 
-  function search() {}
+  let exam_types = {
+    "Alle"                  : "ALL",
+    "Basismodule"           : "BASE",
+    "Anwendungsschwerpunkt" : "ADDITIONAL",
+    "Schlüsselkompetenzen"  : "KEY_COMPETENCE"
+  };
+
+  function search() {
+    search_text = search_text_input;
+  }
 
   function filter() {}
 
@@ -47,13 +58,17 @@
   }
   function filter_semester(s) {
     filter_options["semester"] = s;
-    console.log(filter_options);
   }
 
   export let data = {
     results: [],
   };
 </script>
+
+<style>
+  @import './style.css';
+</style>
+
 
 <svelte:head>
   <title>Prüfungsverwaltung</title>
@@ -109,14 +124,13 @@
       <Row cols={2}>
         <Col sm={{ size: 6, offset: 4 }}>
           <InputGroup>
-            <Input placeholder="Prüfung finden" />
+            <Input bind:value={search_text_input} placeholder="Prüfung finden" />
             <Button on:click={search}>Suchen</Button>
           </InputGroup>
         </Col>
         <Col sm={{ size: 1, offset: 0 }}>
           <Button class="bg-info border border-0" on:click={filter}
-            >Filter</Button
-          >
+            >Filter</Button>
         </Col>
       </Row>
     </Col>
@@ -168,17 +182,16 @@
             <DropdownToggle caret>{filter_options["modulart"]}</DropdownToggle>
             <DropdownMenu>
               <DropdownItem header>Modulart</DropdownItem>
+              <DropdownItem on:click={() => filter_modulart("Alle")}
+                >Alle</DropdownItem>
               <DropdownItem on:click={() => filter_modulart("Basismodule")}
-                >Basismodule</DropdownItem
-              >
+                >Basismodule</DropdownItem>
               <DropdownItem
                 on:click={() => filter_modulart("Anwendungsschwerpunkt")}
-                >Anwendungsschwerpunkt</DropdownItem
-              >
+                >Anwendungsschwerpunkt</DropdownItem>
               <DropdownItem
                 on:click={() => filter_modulart("Schlüsselkompetenzen")}
-                >Schlüsselkompetenzen</DropdownItem
-              >
+                >Schlüsselkompetenzen</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </Col>
@@ -190,6 +203,7 @@
             <DropdownToggle caret>{filter_options["semester"]}</DropdownToggle>
             <DropdownMenu>
               <DropdownItem header>Semester</DropdownItem>
+              <DropdownItem on:click={() => filter_semester("Alle")}>Alle</DropdownItem>
               <DropdownItem on:click={() => filter_semester(1)}>1</DropdownItem>
               <DropdownItem on:click={() => filter_semester(2)}>2</DropdownItem>
               <DropdownItem on:click={() => filter_semester(3)}>3</DropdownItem>
@@ -215,24 +229,14 @@
 
 <Container>
   {#each data.results as result}
-    <div class="mt-5">
-      <svelte:component this={Exam_container} active="true" data={result} />
-    </div>
+  <!-- filter only new exams, search, moduletype, planned semester for module-->
+	{#if ( filter_options["only_new_exams"] == false || result["status"] != "passed" )
+    && ( search_text == "" || result["name"].includes(search_text) )
+    && ( filter_options["modulart"] == "Alle" || result["type"] == exam_types[ filter_options["modulart"] ] )
+    && ( filter_options["semester"] == "Alle" || result["planned_semester"] == filter_options["semester"] ) }
+		<div class="mt-5">
+		<svelte:component this={Exam_container} active="false" data={result} />
+		</div>
+	{/if}
   {/each}
 </Container>
-
-<style>
-  .nav_bar {
-    background-color: #005f50;
-  }
-  .span_white {
-    color: white;
-  }
-
-  :global(.nav_link) {
-    background-color: rgb(255 255 255 / 25%) !important;
-  }
-  :global(.bg_grey_1) {
-    background-color: rgb(0 0 0 / 15%) !important;
-  }
-</style>

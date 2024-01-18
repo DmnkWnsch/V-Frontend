@@ -13,7 +13,7 @@
       } from 'sveltestrap';
   
   // import custom components
-  import Sub_exam_container from './sub_exam_container.svelte';
+  import Sub_exam_container from './sub-exam-container/sub_exam_container.svelte';
 
   export let active;
   active = ( active == "true" ) ? "active" : "";
@@ -22,16 +22,7 @@
 </script>
 
 <style>
-  :global(.badge_schriftlich) {
-    background-color: #7749f8 !important;
-  }
-  :global(.badge_mündlich) {
-    background-color: #49a4f8 !important;
-  }
-  :global(.badge_PVL) {
-    background-color: #ffc107 !important;
-    color: black !important;
-  }
+  @import './style.css';
 </style>
 
 <Accordion>
