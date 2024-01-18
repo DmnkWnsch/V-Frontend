@@ -31,7 +31,7 @@
         id="first_name"
         type="text"
         class="form-control"
-        placeholder="Deine Mom"
+        placeholder="Max"
         required
       />
     </div>
@@ -42,7 +42,7 @@
         id="last_name"
         type="text"
         class="form-control"
-        placeholder="Deine Mom"
+        placeholder="Mustermann"
         required
       />
     </div>

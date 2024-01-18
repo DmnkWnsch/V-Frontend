@@ -32,7 +32,6 @@ export const actions = {
 const updateStudent = async (formData) => {
   const studentId = formData.get("id");
 
-  console.log(studentId);
   const studentData = {
     name: formData.get("first_name"),
     last_name: formData.get("last_name"),
