@@ -4,7 +4,8 @@
 	import consts from '../../consts';
     import ModuleAcccordion from './components/moduleAcccordion.svelte';
 
-	const loadModules= async () => {
+	export let data;
+	/*const loadModules= async () => {
 	const modulesReq = await fetch(consts.API_URL + "/modules" , {
       method: "GET",
       headers: { "Content-Type": "application/json",},});
@@ -12,7 +13,7 @@
     	return {modules: modulesRes,}
 	}
 
-	let dataPromise = loadModules();
+	let dataPromise = loadModules();*/
 </script>
 
 <svelte:head>
@@ -135,7 +136,10 @@
 		</Row>
 	</Container>
 	<br/>
-	{#await dataPromise}
+	{#each data.modules as mod}
+		<ModuleAcccordion id={mod.id} name={mod.name} credits={mod.credits}/>			
+	{/each}
+	<!--{#await dataPromise}
   		<div class="col-12 text-center">
    		<div class="spinner-border text-secondary" role="status">
       	<span class="visually-hidden">Loading...</span>
@@ -145,7 +149,7 @@
 		{#each data.modules as mod}
 			<ModuleAcccordion id={mod.id} name={mod.name} credits={mod.credits}/>			
 		{/each}
-	{/await}
+	{/await}-->
 </main>
 
 
