@@ -11,7 +11,7 @@ export async function load({ params }) {
   });
   let memberResRes = await memberResReq.json();
   let exams_passed = memberResRes.filter(item => item["status"] == "passed");
-  let overall_result = exams_passed.reduce((total, next) => total + parseFloat(next["grade"]), 0) / exams_passed.length;
+  let overall_result = ( exams_passed.reduce((total, next) => total + parseFloat(next["grade"]), 0) / exams_passed.length ).toFixed(2);
   let total_points = 0;
   // append more exam information
   let memberResCourseModulesRes = [];
@@ -48,7 +48,6 @@ export async function load({ params }) {
       return  el["id"] == memberResRes[i]["exam_id"];
     })[0];
 
-    console.log(memberResCourseModulesRes);
     let course_information = memberResCourseModulesRes.filter(item => item["module_id"] == memberResultModuleRes["id"]);
 
 
@@ -76,7 +75,7 @@ export async function load({ params }) {
         {
           "name"			:	memberResultModuleRes["name"],
           "type"			:	( typeof memberResultExamRes === 'undefined' ) ? "" : exam_types_long[ memberResultExamRes["type"] ],
-          "result"		:	memberResRes[i]["grade"],
+          "result"		:	memberResRes[i]["grade"].toFixed(2),
           "points"		:	memberResultModuleRes["credits"],
           "date"			:	"07.02.2023",
           "exam_content"	:	( typeof memberResultExamRes === 'undefined' ) ? "" : exam_types_long[ memberResultExamRes["type"] ],
@@ -113,8 +112,6 @@ export async function load({ params }) {
   }, {});
 
   memberResRes = Object.values(groupedById);
-
-  console.log(memberResRes);
 
   return {
     results: memberResRes,
