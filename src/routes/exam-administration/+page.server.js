@@ -34,7 +34,7 @@ export async function load({ params }) {
     let memberResultModuleRes = await memberResultModuleReq.json();
     memberResultModuleRes = memberResultModuleRes[0];
     // add exam data
-    const memberResultExamReq = await fetch(consts.API_URL + "/exams", {
+    const memberResultExamReq = await fetch(consts.API_URL + "/modules/" + memberResRes[i]["module_id"] + "/exams", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
