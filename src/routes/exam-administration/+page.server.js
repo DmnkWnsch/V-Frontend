@@ -14,13 +14,16 @@ export async function load({ params }) {
   let overall_result = exams_passed.reduce((total, next) => total + parseFloat(next["grade"]), 0) / exams_passed.length;
   let total_points = 0;
   // append more exam information
-  const memberResCourseModulesReq = await fetch(consts.API_URL + "/courses/1/modules", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  let memberResCourseModulesRes = await memberResCourseModulesReq.json();
+  let memberResCourseModulesRes = [];
+  for ( let i = 0 ; i < consts.courses.length ; i++ ) {
+    const memberResCourseModulesReq = await fetch(consts.API_URL + "/courses/" + consts.courses[i]["id"] + "/modules", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    memberResCourseModulesRes.push(...await memberResCourseModulesReq.json());
+  }
 
   // iterate over results and append missing information
   for ( let i = 0 ; i < memberResRes.length ; i++ ) {
@@ -67,9 +70,10 @@ export async function load({ params }) {
       "status"            : memberResRes[i]["status"],
       "type"              : course_information["type"],
       "planned_semester"  : course_information["planned_semester"],
+      "course_id"         : course_information["course_id"],
       "sub_exams"	:	[
         {
-          "name"			:	"",
+          "name"			:	memberResultModuleRes["name"],
           "type"			:	( typeof memberResultExamRes === 'undefined' ) ? "" : exam_types_long[ memberResultExamRes["type"] ],
           "result"		:	memberResRes[i]["grade"],
           "points"		:	memberResultModuleRes["credits"],
@@ -85,6 +89,30 @@ export async function load({ params }) {
       total_points += memberResultModuleRes["credits"];
     }
   }
+
+  // group subexams
+  // Create a mapping of objects based on their "id" values
+  const groupedById = memberResRes.reduce((accumulator, currentValue) => {
+    const id = currentValue.id;
+
+    // If the id is already present in the accumulator, push the current object's sub_exams and tags to the existing entry
+    if (accumulator[id]) {
+      accumulator[id].sub_exams.push(...currentValue.sub_exams);
+      accumulator[id].tags = [...new Set([...accumulator[id].tags, ...currentValue.tags])];
+    } else {
+      // If the id is not present, create a new object with the current value's sub_exams and tags
+      accumulator[id] = {
+        ...currentValue,
+        sub_exams: [...currentValue.sub_exams],
+        tags: [...currentValue.tags]
+      };
+    }
+
+    return accumulator;
+  }, {});
+
+  memberResRes = Object.values(groupedById);
+
   return {
     results: memberResRes,
     overall_result : overall_result,
