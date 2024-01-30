@@ -28,7 +28,7 @@
   import { enhance } from "$app/forms";
 
   let filter_options = {
-    anwendungsschwerpunkt: "Medieninformatik",
+    anwendungsschwerpunkt: "Alle",
     modulart: "Alle",
     semester: "Alle",
     only_new_exams: false,
@@ -41,6 +41,13 @@
     "Basismodule"           : "BASE",
     "Anwendungsschwerpunkt" : "ADDITIONAL",
     "Schlüsselkompetenzen"  : "KEY_COMPETENCE"
+  };
+  let course_types = {
+    "Alle"                  : "ALL",
+    "Verteilte Systeme"     : 3,
+    "Eingebettete Systeme"  : 1,
+    "Computergrafik"        : 4,
+    "Medieninformatik"      : 2
   };
 
   function search() {
@@ -154,23 +161,28 @@
               <DropdownItem header>Anwendungsschwerpunkt</DropdownItem>
               <DropdownItem
                 on:click={() =>
+                  filter_anwendungsschwerpunkt("Alle")}
+                >Alle
+              </DropdownItem>
+              <DropdownItem
+                on:click={() =>
                   filter_anwendungsschwerpunkt("Medieninformatik")}
-                >Medieninformatik</DropdownItem
-              >
+                >Medieninformatik
+              </DropdownItem>
               <DropdownItem
                 on:click={() => filter_anwendungsschwerpunkt("Computergrafik")}
-                >Computergrafik</DropdownItem
-              >
+                >Computergrafik
+              </DropdownItem>
               <DropdownItem
                 on:click={() =>
                   filter_anwendungsschwerpunkt("Eingebettete Systeme")}
-                >Eingebettete Systeme</DropdownItem
-              >
+                >Eingebettete Systeme
+              </DropdownItem>
               <DropdownItem
                 on:click={() =>
                   filter_anwendungsschwerpunkt("Verteilte Systeme")}
-                >Verteilte Systeme</DropdownItem
-              >
+                >Verteilte Systeme
+              </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </Col>
@@ -232,6 +244,7 @@
   <!-- filter only new exams, search, moduletype, planned semester for module-->
 	{#if ( filter_options["only_new_exams"] == false || result["status"] != "passed" )
     && ( search_text == "" || result["name"].includes(search_text) )
+    && ( filter_options["anwendungsschwerpunkt"] == "Alle" || result["course_id"].includes(course_types[ filter_options["anwendungsschwerpunkt"] ]) )
     && ( filter_options["modulart"] == "Alle" || result["type"] == exam_types[ filter_options["modulart"] ] )
     && ( filter_options["semester"] == "Alle" || result["planned_semester"] == filter_options["semester"] ) }
 		<div class="mt-5">

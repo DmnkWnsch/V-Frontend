@@ -48,7 +48,8 @@ export async function load({ params }) {
       return  el["id"] == memberResRes[i]["exam_id"];
     })[0];
 
-    let course_information = memberResCourseModulesRes.filter(item => item["module_id"] == memberResultModuleRes["id"] )[0];
+    console.log(memberResCourseModulesRes);
+    let course_information = memberResCourseModulesRes.filter(item => item["module_id"] == memberResultModuleRes["id"]);
 
 
     let exam_types_short = {
@@ -68,9 +69,9 @@ export async function load({ params }) {
       "points"	          :	memberResultModuleRes["credits"],
       "id"		            : memberResultModuleRes["id"],
       "status"            : memberResRes[i]["status"],
-      "type"              : course_information["type"],
-      "planned_semester"  : course_information["planned_semester"],
-      "course_id"         : course_information["course_id"],
+      "type"              : course_information[0]["type"],
+      "planned_semester"  : course_information[0]["planned_semester"],
+      "course_id"         : course_information.filter(item => [ "BASE", "FIELD_MODULE" ].includes(item["type"])).map(obj => obj["course_id"]),
       "sub_exams"	:	[
         {
           "name"			:	memberResultModuleRes["name"],
@@ -112,6 +113,8 @@ export async function load({ params }) {
   }, {});
 
   memberResRes = Object.values(groupedById);
+
+  console.log(memberResRes);
 
   return {
     results: memberResRes,
