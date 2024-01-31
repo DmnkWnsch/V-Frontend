@@ -11,7 +11,7 @@
   let foundExams = [];
 
   const searchModule = async () => {
-    if (searchInput.toString().trim().length != 6) {
+    if (searchInput?.toString().trim().length != 6) {
       return (targetModule = {});
     }
 
@@ -24,6 +24,10 @@
 
     if (moduleReq.status == 200) {
       const moduleRes = await moduleReq.json();
+
+      if (moduleRes.length == 0) {
+        return (targetModule = { name: "bist du dumm?" });
+      }
 
       const examsReq = await fetch(
         consts.API_URL + "/modules/" + searchInput + "/exams",
@@ -72,7 +76,7 @@
             <div class="col"><ExamPlanCard type={exam.type} /></div>
           {/each}
         </div>
-      {:else if searchInput.toString().length != 6}
+      {:else if searchInput?.toString().length != 6}
         Bitte eine 6-stellige Modul-ID eingeben.
       {/if}
     </div>

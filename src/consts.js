@@ -23,7 +23,16 @@ const courses = [
   },
 ];
 
+const EXAM_TYPES = [
+  { type: "WRITTEN", name: "Schriftliche Prüfung" },
+  { type: "ORAL", name: "mündliche Prüfung" },
+  { type: "SEMINAR_PAPER", name: "Hausarbeit" },
+  { type: "TASKS", name: "Prüfungsvorleistung" },
+  { type: "LABORATORY", name: "Praktikum" },
+];
+
 export default {
   API_URL,
   courses,
+  EXAM_TYPES,
 };
