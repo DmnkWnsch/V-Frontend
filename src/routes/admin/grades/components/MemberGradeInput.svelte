@@ -19,6 +19,9 @@
     id={studentIdElementName}
     name={studentIdElementName}
     placeholder="123456"
+    min="100000"
+    max="999999"
+    required
   />
 </div>
 <div class="col-md-4">
@@ -29,6 +32,8 @@
     id={gradeElementName}
     name={gradeElementName}
     placeholder="1.7"
+    step=".1"
+    required
   />
 </div>
 <div class="col-md-4 d-flex align-items-end">
