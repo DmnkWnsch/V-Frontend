@@ -8,7 +8,7 @@
     Einen neuen Studenten anlegen
   </LandingPageItem>
 
-  <LandingPageItem title="Noten bearbeiten" url="/admin/students/edit">
+  <LandingPageItem title="Student bearbeiten" url="/admin/students/edit">
     Daten eines Studenten bearbeiten
   </LandingPageItem>
 </LandingPage>
