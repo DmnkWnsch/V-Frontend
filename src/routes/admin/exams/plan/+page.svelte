@@ -2,9 +2,10 @@
   // @ts-nocheck
 
   import consts from "../../../../consts";
-  import ExamPlanCard from "../components/ExamPlanCard.svelte";
+  import MessageBanner from "../../components/MessageBanner.svelte";
 
   export let data;
+  export let form;
 
   let searchInput = "";
   let targetModule = {};
@@ -26,7 +27,7 @@
       const moduleRes = await moduleReq.json();
 
       if (moduleRes.length == 0) {
-        return (targetModule = { name: "bist du dumm?" });
+        return (targetModule = { error: true });
       }
 
       const examsReq = await fetch(
@@ -44,6 +45,17 @@
       return (targetModule = moduleRes[0]);
     }
   };
+
+  const getExamTypeName = (examtype) => {
+    let result = "";
+    consts.EXAM_TYPES.forEach((et) => {
+      if (et.type === examtype) {
+        result = et.name;
+      }
+    });
+
+    return result;
+  };
 </script>
 
 <svelte:head>
@@ -52,7 +64,18 @@
 </svelte:head>
 
 <div class="container bg-light-subtle border my-4 p-3 shadow-sm">
-  <form action="?/addStudent" method="POST" class="row g-3">
+  {#if form?.success}
+    <MessageBanner type="success">
+      Der Prüfungstermin wurde erfolgreich festgelegt!
+    </MessageBanner>
+  {/if}
+  {#if form?.error}
+    <MessageBanner type="error">
+      {form?.message}
+    </MessageBanner>
+  {/if}
+
+  <form action="?/planExam" method="POST" class="row g-3">
     <div class="col-12 fs-5">Prüfungstermin hinzufügen</div>
     <div class="col-4">
       <label class="form-label" for="search"
@@ -68,30 +91,47 @@
         on:input={searchModule}
       />
     </div>
-    <div class="col-12">
-      {#if targetModule.name}
-        Prüfungen für Modul <b>{targetModule?.name}</b>
-        <div class="row row-cols-3 mt-3">
+    {#if targetModule.name}
+      <div class="col-12">
+        Prüfungstyp für Modul <b>{targetModule?.name}</b> auswählen
+      </div>
+      <div class="col-4">
+        <select required class="form-select" id="exam" name="exam">
           {#each foundExams as exam}
-            <div class="col"><ExamPlanCard type={exam.type} /></div>
+            <option value={exam.id}>{getExamTypeName(exam.type)}</option>
           {/each}
-        </div>
-      {:else if searchInput?.toString().length != 6}
-        Bitte eine 6-stellige Modul-ID eingeben.
-      {/if}
-    </div>
+        </select>
+      </div>
 
-    <div class="col col-lg-6">
-      <label class="form-label" for="reg_period">Anmeldeperiode</label>
-      <select class="form-select" id="reg_period" name="reg_period" required>
-        {#each data.periods as period}
-          <option value={period.id}>{period.name}</option>
-        {/each}
-      </select>
-    </div>
-    <div class="col col-lg-3">
-      <label class="form-label" for="date">Prüfungsdatum</label>
-      <input class="form-control" id="date" name="date" type="date" required />
-    </div>
+      <div class="col-12 fs-5">Prüfungstermin festlegen</div>
+      <div class="col col-lg-6">
+        <label class="form-label" for="reg_period">Anmeldeperiode</label>
+        <select class="form-select" id="reg_period" name="reg_period" required>
+          {#each data.periods as period}
+            <option value={period.id}>{period.name}</option>
+          {/each}
+        </select>
+      </div>
+      <div class="col col-lg-3">
+        <label class="form-label" for="date">Prüfungsdatum</label>
+        <input
+          class="form-control"
+          id="date"
+          name="date"
+          type="date"
+          required
+        />
+      </div>
+
+      <div class="col-12">
+        <button class="btn btn-success">Prüfungstermin festlegen</button>
+      </div>
+    {:else if searchInput?.toString().length != 6}
+      <div class="col-12">Bitte eine 6-stellige Modul-ID eingeben.</div>
+    {:else if targetModule.error}
+      <div class="col-12">
+        <b>Fehler:</b> Das Modul <b>{searchInput}</b> existiert nicht.
+      </div>
+    {/if}
   </form>
 </div>
