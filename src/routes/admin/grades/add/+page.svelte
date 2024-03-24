@@ -30,7 +30,7 @@
       const moduleRes = await moduleReq.json();
 
       if (moduleRes.length == 0) {
-        return (targetModule = { name: "bist du dumm?" });
+        return (targetModule = { error: true });
       }
 
       const examsReq = await fetch(
@@ -95,6 +95,11 @@
   let memberCount = 1;
   const increaseMemberCount = () => {
     memberCount = memberCount + 1;
+
+    const element = document.getElementById("savebutton");
+    element?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   const decreaseMemberCount = () => {
@@ -175,15 +180,7 @@
           <b>{selectedRegistrationPeriodId}</b> vergeben
         </div>
         {#each Array(memberCount) as _, index (index)}
-          {#if index + 1 == memberCount && memberCount > 1}
-            <MemberGradeInput
-              id={memberCount}
-              last={true}
-              on:click={decreaseMemberCount}
-            />
-          {:else}
-            <MemberGradeInput id={memberCount} />
-          {/if}
+          <MemberGradeInput id={memberCount} />
         {/each}
         <div class="col-12">
           <button
@@ -193,15 +190,28 @@
           >
             Weitere Note hinzufügen
           </button>
+          {#if memberCount > 1}
+            <button
+              on:click={decreaseMemberCount}
+              type="button"
+              class="btn btn-danger btn-sm"
+            >
+              Letztes Eingabefeld entfernen
+            </button>
+          {/if}
         </div>
       {/if}
     {:else if searchInput?.toString().length != 6}
       <div class="col-12">Bitte eine 6-stellige Modul-ID eingeben.</div>
+    {:else if targetModule.error}
+      <div class="col-12">
+        <b>Fehler:</b> Das Modul <b>{searchInput}</b> existiert nicht.
+      </div>
     {/if}
 
     <div class="col-12 fs-5 mt-5">Noten abspeichern</div>
     <div class="col-12">
-      <button class="btn btn-success">Noten speichern</button>
+      <button id="savebutton" class="btn btn-success">Noten speichern</button>
     </div>
   </form>
 </div>
