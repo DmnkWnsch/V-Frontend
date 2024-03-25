@@ -13,8 +13,12 @@
   let foundPlannedExams = [];
   let selectedExamId = "";
   let selectedRegistrationPeriodId = "";
+  let noRegistrationPeriodsFound = false;
+  let registrationPeriodsResult = false;
 
   const searchModule = async () => {
+    selectedExamId = "";
+    selectedRegistrationPeriodId = "";
     if (searchInput?.toString().trim().length != 6) {
       return (targetModule = {});
     }
@@ -45,11 +49,18 @@
       const examsRes = await examsReq.json();
       foundExams = examsRes;
 
+      noRegistrationPeriodsFound = false;
+      selectedExamId = "";
+      selectedRegistrationPeriodId = "";
+
       return (targetModule = moduleRes[0]);
     }
   };
 
   const searchTermsForExam = async () => {
+    selectedRegistrationPeriodId = "";
+    noRegistrationPeriodsFound = false;
+    registrationPeriodsResult = false;
     if (!selectedExamId) return (foundPlannedExams = []);
 
     const plannedExamsReq = await fetch(
@@ -64,7 +75,8 @@
 
     if (plannedExamsReq.status == 200) {
       const plannedExamsRes = await plannedExamsReq.json();
-
+      noRegistrationPeriodsFound = plannedExamsRes.length == 0 ? true : false;
+      registrationPeriodsResult = true;
       return (foundPlannedExams = plannedExamsRes);
     }
   };
@@ -155,23 +167,29 @@
           {/each}
         </select>
       </div>
-      {#if selectedExamId}
-        <div class="col-4">
-          <label class="form-label" for="term">
-            Semester der Prüfung auswählen
-          </label>
-          <select
-            required
-            class="form-select"
-            id="term"
-            name="term"
-            bind:value={selectedRegistrationPeriodId}
-          >
-            {#each foundPlannedExams as exam}
-              <option value={exam.name}>{exam.name}</option>
-            {/each}
-          </select>
-        </div>
+      {#if selectedExamId && registrationPeriodsResult}
+        {#if noRegistrationPeriodsFound}
+          <div class="col-12">
+            <b>Fehler:</b> Für diese Prüfung gibt es keine Anmeldeperioden.
+          </div>
+        {:else}
+          <div class="col-4">
+            <label class="form-label" for="term">
+              Semester der Prüfung auswählen
+            </label>
+            <select
+              required
+              class="form-select"
+              id="term"
+              name="term"
+              bind:value={selectedRegistrationPeriodId}
+            >
+              {#each foundPlannedExams as exam}
+                <option value={exam.name}>{exam.name}</option>
+              {/each}
+            </select>
+          </div>
+        {/if}
       {/if}
       {#if selectedExamId && selectedRegistrationPeriodId}
         <div class="col-12 fs-5">
@@ -200,6 +218,12 @@
             </button>
           {/if}
         </div>
+        <div class="col-12 fs-5 mt-5">Noten abspeichern</div>
+        <div class="col-12">
+          <button id="savebutton" class="btn btn-success"
+            >Noten speichern</button
+          >
+        </div>
       {/if}
     {:else if searchInput?.toString().length != 6}
       <div class="col-12">Bitte eine 6-stellige Modul-ID eingeben.</div>
@@ -208,10 +232,5 @@
         <b>Fehler:</b> Das Modul <b>{searchInput}</b> existiert nicht.
       </div>
     {/if}
-
-    <div class="col-12 fs-5 mt-5">Noten abspeichern</div>
-    <div class="col-12">
-      <button id="savebutton" class="btn btn-success">Noten speichern</button>
-    </div>
   </form>
 </div>
