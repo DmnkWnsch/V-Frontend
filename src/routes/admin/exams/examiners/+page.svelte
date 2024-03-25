@@ -120,7 +120,7 @@
 <div class="container bg-light-subtle border my-4 p-3 shadow-sm">
   {#if form?.success}
     <MessageBanner type="success">
-      Der Prüfer wurde erfolgreich hinzugefügt.
+      {form?.message}
     </MessageBanner>
   {/if}
   {#if form?.error}
@@ -199,15 +199,28 @@
           </div>
         {:else}
           <div class="row row-cols-1 row-cols-md-2 gx-3">
-            {#each foundExaminers as examiner}
+            {#each foundExaminers as examiner, index (index)}
               <div class="col">
                 <div class="card mt-3">
                   <div class="card-body">
                     <h5 class="card-title">
                       {examiner.last_name}, {examiner.name}
                     </h5>
-                    <b>ID:</b>
-                    {examiner.id}
+                    <p>
+                      <b>ID:</b>
+                      {examiner.id}
+                    </p>
+                    <input
+                      name={"examiner_id_" + (index + 1)}
+                      value={examiner.id}
+                      hidden
+                    />
+                    <button
+                      type="submit"
+                      class="btn btn-danger"
+                      name="action"
+                      value={"delete_" + (index + 1)}>Entfernen</button
+                    >
                   </div>
                 </div>
               </div>
@@ -225,7 +238,6 @@
             placeholder="123456"
             min="100000"
             max="999999"
-            required
           />
         </div>
         <div class="col-4 d-flex align-items-end">
