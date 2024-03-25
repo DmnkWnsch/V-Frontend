@@ -56,7 +56,7 @@
 
   <div class="row g-3">
     <div class="col-12 fs-5">Studierenden bearbeiten</div>
-    <div class="col-12">
+    <div class="col-6">
       <label for="search-field" class="form-label"
         >Namen oder Matrikelnummer eingeben:</label
       >
@@ -67,6 +67,8 @@
         bind:value={searchTerm}
         on:input={searchStudent}
       />
+    </div>
+    <div class="col-12">
       <div class="row row-cols-1 row-cols-md-2">
         {#each filteredStudents as student}
           <div class="col">
