@@ -4,6 +4,7 @@
   const navElements = {
     Hinzufügen: "/admin/students/add",
     Bearbeiten: "/admin/students/edit",
+    Prüfungsanmeldungen: "/admin/students/registrations",
   };
 </script>
 

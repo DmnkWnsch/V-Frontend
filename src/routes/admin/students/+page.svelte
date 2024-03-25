@@ -11,4 +11,11 @@
   <LandingPageItem title="Student bearbeiten" url="/admin/students/edit">
     Daten eines Studenten bearbeiten
   </LandingPageItem>
+
+  <LandingPageItem
+    title="Prüfungsanmeldungen verwalten"
+    url="/admin/students/registrations"
+  >
+    Prüfungsanmeldungen einsehen und bearbeiten
+  </LandingPageItem>
 </LandingPage>
