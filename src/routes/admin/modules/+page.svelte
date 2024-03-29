@@ -9,7 +9,7 @@
     angelegt.
   </LandingPageItem>
 
-  <LandingPageItem title="Module bearbeiten" url="/admin/modules/add">
+  <LandingPageItem title="Module bearbeiten" url="/admin/modules/edit">
     In diesem Bereich können die bereits bestehenden Module bearbeitet werden.<br
     /><b>Achtung:</b> Modul-IDs können nicht verändert werden.
   </LandingPageItem>

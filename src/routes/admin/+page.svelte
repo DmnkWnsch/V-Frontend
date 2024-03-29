@@ -13,7 +13,7 @@
   <LandingPageItem title="Prüfungsverwaltung" url="/admin/exams"
     >Prüfungen verwalten</LandingPageItem
   >
-  <LandingPageItem title="Studenten verwalten" url="/admin/modules"
+  <LandingPageItem title="Studenten verwalten" url="/admin/students"
     >Studenten verwalten</LandingPageItem
   >
 </LandingPage>
