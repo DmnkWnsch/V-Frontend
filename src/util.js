@@ -1,3 +1,4 @@
+// @ts-nocheck
 const formatDate = (/** @type {Date} */ date) => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -8,6 +9,26 @@ const formatDate = (/** @type {Date} */ date) => {
   return `${dayString}.${monthString}.${year}`;
 };
 
+const getNameByRegistrationState = (state) => {
+  switch (state.toLowerCase()) {
+    case "allowed":
+      return "Zugelassen";
+    case "conditional":
+      return "Vorbehalt";
+  }
+};
+
+const getColorByRegistrationState = (state) => {
+  switch (state.toLowerCase()) {
+    case "allowed":
+      return "bg-success";
+    case "conditional":
+      return "bg-warning";
+  }
+};
+
 export default {
   formatDate,
+  getNameByRegistrationState,
+  getColorByRegistrationState,
 };
