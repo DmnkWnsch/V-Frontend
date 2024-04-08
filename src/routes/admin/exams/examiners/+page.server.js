@@ -66,7 +66,7 @@ const addExaminer = async (formData) => {
     return {
       success: true,
       data: addExaminerRes.data,
-      message: `${delExaminerRes.data.last_name}, ${delExaminerRes.data.name} (${delExaminerRes.data.id}) wurde erfolgreich
+      message: `${addExaminerRes.data.last_name}, ${addExaminerRes.data.name} (${addExaminerRes.data.id}) wurde erfolgreich
       als Prüfer festgelegt.`,
     };
   } else {
