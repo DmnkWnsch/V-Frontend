@@ -155,6 +155,9 @@
                   <b>{grade.module_id}</b>
                 </div>
                 <div class="col">
+                  <b>{consts.getExamTypeName(grade.type)}</b>
+                </div>
+                <div class="col">
                   <h5 class="mb-0">
                     <span class={"badge text-bg-" + getBadgeColor(grade.status)}
                       >{getTitleByStatus(grade.status)}</span
@@ -173,6 +176,10 @@
               <div class="accordion-body row">
                 <div class="col-4"><b>Modul</b></div>
                 <div class="col-4">{grade.module_id}</div>
+                <div class="col-4"></div>
+
+                <div class="col-4"><b>Prüfungsart</b></div>
+                <div class="col-4">{consts.getExamTypeName(grade.type)}</div>
                 <div class="col-4"></div>
 
                 <div class="col-4"><b>Semester der Leistung</b></div>
