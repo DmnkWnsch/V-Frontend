@@ -20,12 +20,10 @@
 <div class="container bg-light-subtle border my-4 p-3 shadow-sm">
   {#if form?.success}
     <MessageBanner type="success">
-      {#if form?.reason == "REG_ADD"}
-        Die Anmeldung wurde erfolgreich gespeichert.
-      {:else if form?.reason == "REG_DEL"}
-        Die Anmeldung wurde erfolgreich gelöscht.
-      {:else if form?.reason == "REG_UPD"}
-        Der neue Status wurde erfolgreich gespeichert.
+      {#if form?.reason == "RES_DEL"}
+        Die Note wurde erfolgreich gelöscht.
+      {:else if form?.reason == "RES_UPD"}
+        Die neue Note wurde erfolgreich gespeichert.
       {/if}
     </MessageBanner>
   {/if}

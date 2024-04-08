@@ -137,103 +137,109 @@
     <div class="accordion" id="gradesAccordion">
       {#each grades as grade, index (index)}
         <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target={"#collapse" + index}
-              aria-expanded="false"
-              aria-controls={"collapse" + index}
-            >
-              <div class="col">
-                <b>{grade.module_id}</b>
-              </div>
-              <div class="col">
-                <h5 class="mb-0">
-                  <span class={"badge text-bg-" + getBadgeColor(grade.status)}
-                    >{getTitleByStatus(grade.status)}</span
-                  >
-                </h5>
-              </div>
-              <div class="col"><b>{grade.grade}</b></div>
-              <div class="col"><b>{grade.try}. Versuch</b></div>
-            </button>
-          </h2>
-          <div
-            id={"collapse" + index}
-            class="accordion-collapse collapse"
-            data-bs-parent="#gradesAccordion"
-          >
-            <div class="accordion-body row">
-              <div class="col-4"><b>Modul</b></div>
-              <div class="col-4">{grade.module_id}</div>
-              <div class="col-4"></div>
+          <form action="?/manageResults" method="POST">
+            <input hidden name="id" value={grade.member_id} />
+            <input hidden name="examId" value={grade.exam_id} />
+            <input hidden name="try" value={grade.try} />
 
-              <div class="col-4"><b>Semester der Leistung</b></div>
-              <div class="col-4">{grade.term}</div>
-              <div class="col-4"></div>
-
-              <div class="col-4"><b>Status</b></div>
-              <div class="col-4">{getTitleByStatus(grade.status)}</div>
-              <div class="col-4"></div>
-
-              <div class="col-4"><b>Versuch</b></div>
-              <div class="col-4">{grade.try}</div>
-              <div class="col-4"></div>
-
-              <div class="col-4"><b>Note</b></div>
-              <div class="col-4">{grade.grade}</div>
-              <div class="col-4"></div>
-
-              {#if grade.editable}
-                <div class="col-12 mt-3">
-                  <button
-                    class="btn btn-success"
-                    type="button"
-                    on:click={setEditingGradeIndex(index)}
-                  >
-                    Note bearbeiten
-                  </button>
-                  <button class="btn btn-danger" name="action" value="delete">
-                    Note löschen
-                  </button>
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target={"#collapse" + index}
+                aria-expanded="false"
+                aria-controls={"collapse" + index}
+              >
+                <div class="col">
+                  <b>{grade.module_id}</b>
                 </div>
+                <div class="col">
+                  <h5 class="mb-0">
+                    <span class={"badge text-bg-" + getBadgeColor(grade.status)}
+                      >{getTitleByStatus(grade.status)}</span
+                    >
+                  </h5>
+                </div>
+                <div class="col"><b>{grade.grade}</b></div>
+                <div class="col"><b>{grade.try}. Versuch</b></div>
+              </button>
+            </h2>
+            <div
+              id={"collapse" + index}
+              class="accordion-collapse collapse"
+              data-bs-parent="#gradesAccordion"
+            >
+              <div class="accordion-body row">
+                <div class="col-4"><b>Modul</b></div>
+                <div class="col-4">{grade.module_id}</div>
+                <div class="col-4"></div>
 
-                {#if editingGradeIndex == index}
-                  <div class="row mt-4 d-flex align-items-center">
-                    <div class="col-4"><b>Neue Note</b></div>
-                    <div class="col-4">
-                      <input
-                        type="number"
-                        class="form-control"
-                        id="new_grade"
-                        name="new_grade"
-                        placeholder="1.7"
-                        step=".1"
-                        required
-                      />
+                <div class="col-4"><b>Semester der Leistung</b></div>
+                <div class="col-4">{grade.term}</div>
+                <div class="col-4"></div>
+
+                <div class="col-4"><b>Status</b></div>
+                <div class="col-4">{getTitleByStatus(grade.status)}</div>
+                <div class="col-4"></div>
+
+                <div class="col-4"><b>Versuch</b></div>
+                <div class="col-4">{grade.try}</div>
+                <div class="col-4"></div>
+
+                <div class="col-4"><b>Note</b></div>
+                <div class="col-4">{grade.grade}</div>
+                <div class="col-4"></div>
+
+                {#if grade.editable}
+                  <div class="col-12 mt-3">
+                    <button
+                      class="btn btn-success"
+                      type="button"
+                      on:click={setEditingGradeIndex(index)}
+                    >
+                      Note bearbeiten
+                    </button>
+                    <button class="btn btn-danger" name="action" value="delete">
+                      Note löschen
+                    </button>
+                  </div>
+
+                  {#if editingGradeIndex == index}
+                    <div class="row mt-4 d-flex align-items-center">
+                      <div class="col-4"><b>Neue Note</b></div>
+                      <div class="col-4">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="new_grade"
+                          name="new_grade"
+                          placeholder="1.7"
+                          step=".1"
+                          required
+                        />
+                      </div>
+                      <div class="col-4">
+                        <button
+                          class="btn btn-success"
+                          type="submit"
+                          name="action"
+                          value="save_grade">Speichern</button
+                        >
+                      </div>
                     </div>
-                    <div class="col-4">
-                      <button
-                        class="btn btn-success"
-                        type="submit"
-                        name="action"
-                        value="save_grade">Speichern</button
-                      >
-                    </div>
+                  {/if}
+                {:else}
+                  <div class="col-12 mt-4">
+                    <b
+                      >Diese Note kann nicht bearbeitet werden, da es einen
+                      neueren Versuch gibt.</b
+                    >
                   </div>
                 {/if}
-              {:else}
-                <div class="col-12 mt-4">
-                  <b
-                    >Diese Note kann nicht bearbeitet werden, da es einen
-                    neueren Versuch gibt.</b
-                  >
-                </div>
-              {/if}
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       {/each}
     </div>
