@@ -103,6 +103,7 @@
                         id="date"
                         name="date"
                         type="date"
+                        min={util.getMinForDatePicker()}
                         required
                       />
                     </div>

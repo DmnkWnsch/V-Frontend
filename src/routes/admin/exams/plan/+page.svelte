@@ -2,6 +2,7 @@
   // @ts-nocheck
 
   import consts from "../../../../consts";
+  import util from "../../../../util";
   import MessageBanner from "../../components/MessageBanner.svelte";
   import Exam from "../../modules/components/exam.svelte";
   import PlannedExamsTable from "../components/PlannedExamsTable.svelte";
@@ -147,6 +148,7 @@
             id="date"
             name="date"
             type="date"
+            min={util.getMinForDatePicker()}
             required
           />
         </div>
