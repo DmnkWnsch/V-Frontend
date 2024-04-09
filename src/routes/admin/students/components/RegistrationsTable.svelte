@@ -25,9 +25,13 @@
     return (registrations = response.data);
   };
 
-  let editStateOpen = false;
-  const changeEditStateOpen = () => {
-    editStateOpen = !editStateOpen;
+  let editStateOpenIndex = -1;
+  const changeEditStateOpen = (index) => {
+    if (editStateOpenIndex == index) {
+      editStateOpenIndex = -1;
+    } else {
+      editStateOpenIndex = index;
+    }
   };
 
   $: loadRegistrations(memberId);
@@ -55,10 +59,10 @@
                 aria-controls={"collapse" + index}
               >
                 <div class="col">
-                  <b>{reg.module_id} </b>
+                  <b>{reg.module_id}</b>
                 </div>
                 <div class="col">
-                  {consts.getExamTypeName(reg.type)}
+                  <b>{consts.getExamTypeName(reg.type)}</b>
                 </div>
                 <div class="col">
                   <h5 class="mb-0">
@@ -98,13 +102,14 @@
                   <button
                     class="btn btn-success"
                     type="button"
-                    on:click={changeEditStateOpen}>Status bearbeiten</button
+                    on:click={changeEditStateOpen(index)}
+                    >Status bearbeiten</button
                   >
                   <button class="btn btn-danger" name="action" value="delete"
                     >Anmeldung löschen</button
                   >
                 </div>
-                {#if editStateOpen}
+                {#if editStateOpenIndex == index}
                   <div class="row mt-4 d-flex align-items-center">
                     <div class="col-4"><b>Neuer Status</b></div>
                     <div class="col-4">
