@@ -3,6 +3,8 @@
 
   import consts from "../../../../consts";
   import MessageBanner from "../../components/MessageBanner.svelte";
+  import Exam from "../../modules/components/exam.svelte";
+  import PlannedExamsTable from "../components/PlannedExamsTable.svelte";
 
   export let data;
   export let form;
@@ -11,7 +13,10 @@
   let targetModule = {};
   let foundExams = [];
 
+  let selectedExamId = -1;
+
   const searchModule = async () => {
+    selectedExamId = -1;
     if (searchInput?.toString().trim().length != 6) {
       return (targetModule = {});
     }
@@ -66,7 +71,13 @@
 <div class="container bg-light-subtle border my-4 p-3 shadow-sm">
   {#if form?.success}
     <MessageBanner type="success">
-      Der Prüfungstermin wurde erfolgreich festgelegt!
+      {#if form?.reason == "EX_DEL"}
+        Die Prüfung wurde erfolgreich gelöscht.
+      {:else if form?.reason == "EX_UPD"}
+        Der neue Termin für die Prüfung wurde gespeichert.
+      {:else if form?.reason == "EX_CRE"}
+        Der Prüfungstermin wurde erfolgreich festgelegt!
+      {/if}
     </MessageBanner>
   {/if}
   {#if form?.error}
@@ -96,36 +107,56 @@
         Prüfungstyp für Modul <b>{targetModule?.name}</b> auswählen
       </div>
       <div class="col-4">
-        <select required class="form-select" id="exam" name="exam">
+        <select
+          required
+          class="form-select"
+          id="exam"
+          name="exam"
+          bind:value={selectedExamId}
+        >
           {#each foundExams as exam}
             <option value={exam.id}>{getExamTypeName(exam.type)}</option>
           {/each}
         </select>
       </div>
 
-      <div class="col-12 fs-5">Prüfungstermin festlegen</div>
-      <div class="col col-lg-6">
-        <label class="form-label" for="reg_period">Anmeldeperiode</label>
-        <select class="form-select" id="reg_period" name="reg_period" required>
-          {#each data.periods as period}
-            <option value={period.id}>{period.name}</option>
-          {/each}
-        </select>
-      </div>
-      <div class="col col-lg-3">
-        <label class="form-label" for="date">Prüfungsdatum</label>
-        <input
-          class="form-control"
-          id="date"
-          name="date"
-          type="date"
-          required
-        />
-      </div>
+      {#if selectedExamId != -1}
+        <div class="col-12 fs-5">Aktuelle Prüfungstermine</div>
+        {#key selectedExamId}
+          <PlannedExamsTable examId={selectedExamId} />
+        {/key}
 
-      <div class="col-12">
-        <button class="btn btn-success">Prüfungstermin festlegen</button>
-      </div>
+        <div class="col-12 fs-5">Neuen Prüfungstermin festlegen</div>
+        <div class="col col-lg-6">
+          <label class="form-label" for="reg_period">Anmeldeperiode</label>
+          <select
+            class="form-select"
+            id="reg_period"
+            name="reg_period"
+            required
+          >
+            {#each data.periods as period}
+              <option value={period.id}>{period.name}</option>
+            {/each}
+          </select>
+        </div>
+        <div class="col col-lg-3">
+          <label class="form-label" for="date">Prüfungsdatum</label>
+          <input
+            class="form-control"
+            id="date"
+            name="date"
+            type="date"
+            required
+          />
+        </div>
+
+        <div class="col-12">
+          <button class="btn btn-success">Prüfungstermin festlegen</button>
+        </div>
+      {:else}
+        <div class="col-12">Bitte eine Prüfung auswählen.</div>
+      {/if}
     {:else if searchInput?.toString().length != 6}
       <div class="col-12">Bitte eine 6-stellige Modul-ID eingeben.</div>
     {:else if targetModule.error}
