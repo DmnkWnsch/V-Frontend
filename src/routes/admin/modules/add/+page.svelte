@@ -22,7 +22,7 @@
   <meta name="description" content="About this app" />
 </svelte:head>
 
-<div class="container bg-body-tertiary border my-4 p-3 shadow-sm">
+<div class="container border rounded-2 my-4 p-3 shadow-sm">
   {#if form?.success}
     <div class="alert alert-success" role="alert">
       Das Modul {form?.id} - {form?.name} wurde erfolgreich gespeichert!

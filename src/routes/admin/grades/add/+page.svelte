@@ -124,7 +124,7 @@
   <meta name="description" content="About this app" />
 </svelte:head>
 
-<div class="container bg-light-subtle border my-4 p-3 shadow-sm">
+<div class="container border rounded-2 my-4 p-3 shadow-sm">
   {#if form?.success}
     <MessageBanner type="success">Die Noten wurden gespeichert!</MessageBanner>
   {/if}
