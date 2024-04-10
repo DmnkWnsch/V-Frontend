@@ -98,6 +98,13 @@
                   {util.getNameByRegistrationState(reg.status)}
                 </div>
                 <div class="col-4"></div>
+
+                <div class="col-4"><b>Semester</b></div>
+                <div class="col-4">
+                  {reg.name}
+                </div>
+                <div class="col-4"></div>
+
                 <div class="col-12 mt-3">
                   <button
                     class="btn btn-success"

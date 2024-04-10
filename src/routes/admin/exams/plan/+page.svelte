@@ -124,7 +124,7 @@
       {#if selectedExamId != -1}
         <div class="col-12 fs-5">Aktuelle Prüfungstermine</div>
         {#key selectedExamId}
-          <PlannedExamsTable examId={selectedExamId} />
+          <PlannedExamsTable examId={selectedExamId} tableType="EDIT" />
         {/key}
 
         <div class="col-12 fs-5">Neuen Prüfungstermin festlegen</div>

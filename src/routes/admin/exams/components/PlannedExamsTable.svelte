@@ -5,6 +5,7 @@
   import ExamContainer from "../../../exam-administration/custom_components/exam_container.svelte";
 
   export let examId;
+  export let tableType;
 
   let plannedExams;
   let isLoading = false;
@@ -50,37 +51,37 @@
     <div class="accordion" id="plannedExamsAccordion">
       {#each plannedExams as exam, index (index)}
         <div class="accordion-item">
-          <form action="?/managePlannedExam" method="POST">
-            <input hidden name="examplan_uid" value={exam.uid} />
+          <input hidden name="examplan_uid" value={exam.uid} />
 
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target={"#collapse" + index}
-                aria-expanded="false"
-                aria-controls={"collapse" + index}
-              >
-                <div class="col">
-                  <b>{util.formatDate(new Date(exam.date))}</b>
-                </div>
-                <div class="col"><b>{exam.name}</b></div>
-              </button>
-            </h2>
-            <div
-              id={"collapse" + index}
-              class="accordion-collapse collapse"
-              data-bs-parent="#plannedExamsAccordion"
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target={"#collapse" + index}
+              aria-expanded="false"
+              aria-controls={"collapse" + index}
             >
-              <div class="accordion-body row">
-                <div class="col-4"><b>Datum</b></div>
-                <div class="col-4">{util.formatDate(new Date(exam.date))}</div>
-                <div class="col-4"></div>
-                <div class="col-4"><b>Anmeldeperiode</b></div>
-                <div class="col-4">{exam.name}</div>
-                <div class="col-4"></div>
+              <div class="col">
+                <b>{util.formatDate(new Date(exam.date))}</b>
+              </div>
+              <div class="col"><b>{exam.name}</b></div>
+            </button>
+          </h2>
+          <div
+            id={"collapse" + index}
+            class="accordion-collapse collapse"
+            data-bs-parent="#plannedExamsAccordion"
+          >
+            <div class="accordion-body row">
+              <div class="col-4"><b>Datum</b></div>
+              <div class="col-4">{util.formatDate(new Date(exam.date))}</div>
+              <div class="col-4"></div>
+              <div class="col-4"><b>Anmeldeperiode</b></div>
+              <div class="col-4">{exam.name}</div>
+              <div class="col-4"></div>
 
+              {#if tableType == "EDIT"}
                 <div class="col-12 mt-3">
                   <button
                     class="btn btn-success"
@@ -93,7 +94,6 @@
                     >Prüfung löschen</button
                   >
                 </div>
-
                 {#if editIndex == index}
                   <div class="row mt-4 d-flex align-items-center">
                     <div class="col-4"><b>Neues Prüfungsdatum</b></div>
@@ -117,9 +117,21 @@
                     </div>
                   </div>
                 {/if}
-              </div>
+              {/if}
+
+              {#if (tableType = "PARTICIPANTS")}
+                <div class="col-12 mt-3">
+                  <a
+                    href={"participants/" + exam.uid}
+                    class="btn btn-success"
+                    role="button"
+                  >
+                    Teilnehmerliste erstellen
+                  </a>
+                </div>
+              {/if}
             </div>
-          </form>
+          </div>
         </div>
       {/each}
     </div>
