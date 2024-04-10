@@ -5,6 +5,7 @@
     Prüfungsplan: "/admin/exams/plan",
     Prüfer: "/admin/exams/examiners",
     Anmeldeperioden: "/admin/exams/registration-periods",
+    Teilnehmerlisten: "/admin/exams/participants",
   };
 </script>
 

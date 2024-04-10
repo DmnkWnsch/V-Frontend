@@ -18,4 +18,11 @@
   >
     Anmeldeperioden erstellen oder bearbeiten
   </LandingPageItem>
+
+  <LandingPageItem
+    title="Teilnehmerlisten erstellen"
+    url="/admin/exams/participants"
+  >
+    Teilnehmerlisten erstellen
+  </LandingPageItem>
 </LandingPage>
