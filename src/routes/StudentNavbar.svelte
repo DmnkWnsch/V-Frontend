@@ -11,6 +11,7 @@
     NavItem,
     NavLink,
   } from "sveltestrap";
+  import { setStoredMemberId, storedMemberId } from "./MemberIdStore";
 
   let isOpen = false;
   // @ts-ignore
@@ -43,3 +44,8 @@
     </Nav>
   </Collapse>
 </Navbar>
+
+<div class="container">
+  Matrikelnummer für Demonstration:
+  <input class="form-control" id="target_member" value={storedMemberId} />
+</div>
