@@ -1,70 +1,137 @@
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
-    import { Button, Card, CardBody, CardHeader, CardTitle, Col, Container, Row } from "sveltestrap";
+  import {
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    CardTitle,
+    Col,
+    Container,
+    Row,
+  } from "sveltestrap";
+  import util from "../../../util";
+  import consts from "../../../consts";
+  import { storedMemberId } from "../../MemberIdStore";
 
-    export let type;
-    export let credits;
+  export let type;
+  export let credits;
+  export let plannedExam;
+  export let registration;
+  export let lastResult;
+
+  const isRegistrationPossible = () => {
+    let periodStart = new Date(plannedExam.start_date);
+    let periodEnd = new Date(plannedExam.end_date);
+
+    periodStart.setHours(0, 0, 0, 0);
+    periodEnd.setHours(23, 59, 59, 0);
+
+    const currentDate = new Date();
+
+    return (
+      periodStart.getTime() <= currentDate.getTime() &&
+      periodEnd.getTime() >= currentDate.getTime()
+    );
+  };
 </script>
 
 <Card>
-    <CardHeader>
-        {#if type == 'WRITTEN'}
-            <CardTitle>Schriftliche Prüfung</CardTitle>
-        {:else if type == 'ORAL'}
-        <CardTitle>Mündliche Prüfung Prüfung</CardTitle>
-        {:else}
-            <CardTitle>Prüfungsvorleistung</CardTitle>
-        {/if}
-    </CardHeader>
-    <CardBody>
-        <Row> 
-            <Col>
-                <Row cols={{lg:2,md:4,sm:1}}>
-                    {#if type != 'TASKS'}
-                        <Col><f>Datum</f></Col>
-                        <Col>07.02.2023</Col>
-                    {:else}
-                        <Col><f>Anmeldezeitraum</f></Col>
-                        <Col>11.12.2023-22.12.2023</Col>
-                    {/if}
-                    <Col><f>Prüfungsart</f></Col>
-                    {#if type == 'WRITTEN'}
-                        <Col>schriftlich</Col>
-                    {:else if type =='ORAL'}
-                        <Col>mündlich</Col>
-                    {:else}
-                        <Col>Abgabe von Übungsaufgaben</Col>
-                    {/if}
-                    {#if type != 'TASKS'}
-                        <Col><f>Leistungspunkte</f></Col>
-                        <Col>{credits}</Col>
-                    {/if}
-                    <Col><f>Status</f></Col>
-                    <Col>nicht angemeldet</Col>
-                </Row>
-            </Col>
-            <Col>
-                <Row cols={{lg:2,md:2,sm:5}}>
-                    <Col><f>Semester der Leistung</f></Col>
-                    <Col>Wintersemester 2022</Col>
-                    <Col><f>Prüfer</f></Col>
-                    <Col>Max Mustermann, Hermann Mann, Christian Franz</Col>
-                </Row>
-            </Col>
-            <Col xs="auto"> 
-                <Container class="h-100 d-flex justify-content-center align-items-center">
-                    <Button color='success'>Anmelden</Button>
-                </Container>
-            </Col>
+  <CardHeader>
+    <CardTitle>{consts.getExamTypeName(type)}</CardTitle>
+  </CardHeader>
+  <CardBody>
+    {#if lastResult?.status == "PASSED"}
+      <div class="fw-bold text-success">
+        Sie haben diese Prüfung bereits bestanden.
+      </div>
+    {:else}
+      {#if !plannedExam}
+        <div class="mb-3">
+          <b class="text-danger">Achtung:</b> Für diese Prüfung liegt aktuell kein
+          Termin vor. Eine Anmeldung ist daher nicht möglich.
+        </div>
+      {:else}
+        <Row cols={{ lg: 2, sm: 2, xs: 1 }}>
+          <Col>
+            <Row cols={{ lg: 2, xs: 1 }}>
+              <Col><f>Datum</f></Col>
+              <Col>{util.formatDate(new Date(plannedExam.date))}</Col>
+              <Col><f>Prüfungsart</f></Col>
+              <Col>{consts.getExamTypeName(type)}</Col>
+              {#if type != "TASKS"}
+                <Col><f>Leistungspunkte</f></Col>
+                <Col>{credits}</Col>
+              {/if}
+              <Col><f>Status</f></Col>
+              <Col>
+                {#if registration}
+                  {util.getNameByRegistrationState(registration.status)}
+                {:else}
+                  nicht angemeldet
+                {/if}
+              </Col>
+            </Row>
+          </Col>
+          <Col>
+            <Row cols={{ lg: 2, xs: 1 }}>
+              <Col><f>Semester der Leistung</f></Col>
+              <Col>{plannedExam.name}</Col>
+              <Col><f>Prüfer</f></Col>
+              <Col>
+                {#if plannedExam.examiners}
+                  {plannedExam.examiners}
+                {:else}
+                  -
+                {/if}
+              </Col>
+              <Col>
+                <f>Anmeldezeitraum</f>
+              </Col>
+              <Col>
+                {util.formatDate(new Date(plannedExam.start_date)) +
+                  " - " +
+                  util.formatDate(new Date(plannedExam.end_date))}
+              </Col>
+            </Row>
+          </Col>
         </Row>
-    </CardBody>
+        {#if !isRegistrationPossible()}
+          <div class="my-3">
+            <b class="text-danger">Achtung:</b> Aktuell läuft keine Anmeldeperiode.
+          </div>
+        {/if}
+      {/if}
+      {#if registration}
+        <div class="d-flex justify-content-start mt-3 text-success fw-bold">
+          Sie sind für diese Prüfung angemeldet.
+        </div>
+      {:else}
+        <form
+          action="?/register"
+          method="POST"
+          class="d-flex justify-content-center mt-3"
+        >
+          <input hidden name="member" value={storedMemberId} />
+          <input hidden name="plan_id" value={plannedExam?.uid} />
+          <Button
+            color={plannedExam && isRegistrationPossible()
+              ? "success"
+              : "secondary"}
+            class="px-3 col-12 col-md-4"
+            disabled={!plannedExam || !isRegistrationPossible()}
+            >Anmelden</Button
+          >
+        </form>
+      {/if}
+    {/if}
+  </CardBody>
 </Card>
-<br/>
+<br />
 
 <style>
-	f{
-		font-weight: bold;
-	}
-
+  f {
+    font-weight: bold;
+  }
 </style>
