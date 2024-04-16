@@ -2,7 +2,6 @@
   // @ts-nocheck
   import consts from "../../../../consts";
   import util from "../../../../util";
-  import ExamContainer from "../../../exam-administration/custom_components/exam_container.svelte";
 
   export let examId;
   export let tableType;
