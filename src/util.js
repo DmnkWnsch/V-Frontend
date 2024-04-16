@@ -27,6 +27,36 @@ const getColorByRegistrationState = (state) => {
   }
 };
 
+const getExamShortNameByType = (type) => {
+  switch (type) {
+    case "WRITTEN":
+      return "Schriftlich";
+    case "ORAL":
+      return "Mündlich";
+    case "SEMINAR_PAPER":
+      return "Hausarbeit";
+    case "TASKS":
+      return "PVL";
+    case "LABORATORY":
+      return "Praktikum";
+  }
+};
+
+const getExamColorBadge = (type) => {
+  switch (type) {
+    case "WRITTEN":
+      return "bg-primary";
+    case "ORAL":
+      return "bg-success";
+    case "SEMINAR_PAPER":
+      return "bg-warning";
+    case "TASKS":
+      return "bg-info";
+    case "LABORATORY":
+      return "bg-secondary";
+  }
+};
+
 const getMinForDatePicker = () => {
   const date = new Date();
   const year = date.getFullYear();
@@ -43,4 +73,6 @@ export default {
   getNameByRegistrationState,
   getColorByRegistrationState,
   getMinForDatePicker,
+  getExamShortNameByType,
+  getExamColorBadge,
 };
