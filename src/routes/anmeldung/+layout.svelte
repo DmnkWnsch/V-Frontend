@@ -3,19 +3,6 @@
 
   import StudentNavbar from "../StudentNavbar.svelte";
   import "../styles.css";
-  import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-  } from "sveltestrap";
 
   let isOpen = false;
   // @ts-ignore
