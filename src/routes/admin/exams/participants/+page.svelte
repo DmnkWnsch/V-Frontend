@@ -4,7 +4,6 @@
   import consts from "../../../../consts";
   import util from "../../../../util";
   import MessageBanner from "../../components/MessageBanner.svelte";
-  import Exam from "../../modules/components/exam.svelte";
   import PlannedExamsTable from "../components/PlannedExamsTable.svelte";
 
   export let data;
@@ -65,7 +64,7 @@
 </script>
 
 <svelte:head>
-  <title>PV-A Prüfungsplan</title>
+  <title>PV-A Teilnehmerlisten</title>
   <meta name="description" content="About this app" />
 </svelte:head>
 
@@ -88,7 +87,7 @@
   {/if}
 
   <form action="?/planExam" method="POST" class="row g-3">
-    <div class="col-12 fs-5">Prüfungstermin hinzufügen</div>
+    <div class="col-12 fs-5">Teilnehmerliste erstellen</div>
     <div class="col-4">
       <label class="form-label" for="search"
         >Prüfung durch Modul-ID suchen</label
@@ -124,38 +123,8 @@
       {#if selectedExamId != -1}
         <div class="col-12 fs-5">Aktuelle Prüfungstermine</div>
         {#key selectedExamId}
-          <PlannedExamsTable examId={selectedExamId} tableType="EDIT" />
+          <PlannedExamsTable examId={selectedExamId} tableType="PARTICIPANTS" />
         {/key}
-
-        <div class="col-12 fs-5">Neuen Prüfungstermin festlegen</div>
-        <div class="col col-lg-6">
-          <label class="form-label" for="reg_period">Anmeldeperiode</label>
-          <select
-            class="form-select"
-            id="reg_period"
-            name="reg_period"
-            required
-          >
-            {#each data.periods as period}
-              <option value={period.id}>{period.name}</option>
-            {/each}
-          </select>
-        </div>
-        <div class="col col-lg-3">
-          <label class="form-label" for="date">Prüfungsdatum</label>
-          <input
-            class="form-control"
-            id="date"
-            name="date"
-            type="date"
-            min={util.getMinForDatePicker()}
-            required
-          />
-        </div>
-
-        <div class="col-12">
-          <button class="btn btn-success">Prüfungstermin festlegen</button>
-        </div>
       {:else}
         <div class="col-12">Bitte eine Prüfung auswählen.</div>
       {/if}

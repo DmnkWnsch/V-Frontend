@@ -1,6 +1,5 @@
 <script>
   export let id;
-  export let last = false;
 
   let studentIdElementName = "studentid_" + id;
   let gradeElementName = "grade_" + id;
@@ -36,8 +35,4 @@
     required
   />
 </div>
-<div class="col-md-4 d-flex align-items-end">
-  {#if last}
-    <button type="button" class="btn btn-danger" on:click>Entfernen</button>
-  {/if}
-</div>
+<div class="col-md-4 d-flex align-items-end"></div>

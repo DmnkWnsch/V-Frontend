@@ -1,3 +1,4 @@
+// @ts-nocheck
 const API_URL = "http://85.209.49.177:3210";
 
 const courses = [
@@ -31,8 +32,20 @@ const EXAM_TYPES = [
   { type: "LABORATORY", name: "Praktikum" },
 ];
 
+const getExamTypeName = (type) => {
+  let result = "";
+  EXAM_TYPES.forEach((et) => {
+    if (et.type == type) {
+      result = et.name;
+    }
+  });
+
+  return result;
+};
+
 export default {
   API_URL,
   courses,
   EXAM_TYPES,
+  getExamTypeName,
 };

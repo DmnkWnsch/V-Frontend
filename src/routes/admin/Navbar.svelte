@@ -18,7 +18,7 @@
     style="background-color: #660000"
   >
     <div class="container-fluid">
-      <span class="navbar-brand">Administration</span>
+      <a class="navbar-brand" href="/admin/">Administration</a>
       <button
         class="navbar-toggler"
         type="button"

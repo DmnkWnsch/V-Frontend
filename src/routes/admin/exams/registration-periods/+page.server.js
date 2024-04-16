@@ -22,9 +22,9 @@ export const actions = {
     const data = await request.formData();
     const action = data.get("action");
     if (action === "save") {
-      savePeriod(data);
+      return await savePeriod(data);
     } else if (action === "delete") {
-      deletePeriod(data);
+      return await deletePeriod(data);
     }
   },
   addPeriod: async ({ cookies, request }) => {
@@ -46,6 +46,20 @@ export const actions = {
         body: JSON.stringify(periodData),
       }
     );
+
+    const addPeriodRes = await addPeriodReq.json();
+    if (addPeriodReq.status == 200) {
+      return {
+        success: true,
+        reason: "add",
+        data: addPeriodRes.data,
+      };
+    } else {
+      return {
+        error: true,
+        message: addPeriodRes.message,
+      };
+    }
   },
 };
 
@@ -67,6 +81,20 @@ const savePeriod = async (formData) => {
       body: JSON.stringify(periodData),
     }
   );
+
+  const savePeriodRes = await savePeriodReq.json();
+  if (savePeriodReq.status == 200) {
+    return {
+      success: true,
+      reason: "save",
+      data: savePeriodRes.data,
+    };
+  } else {
+    return {
+      error: true,
+      message: savePeriodRes.message,
+    };
+  }
 };
 
 const deletePeriod = async (formData) => {
@@ -81,4 +109,18 @@ const deletePeriod = async (formData) => {
       },
     }
   );
+
+  const deletePeriodRes = await deletePeriodReq.json();
+  if (deletePeriodReq.status == 200) {
+    return {
+      success: true,
+      reason: "delete",
+      data: deletePeriodRes.data,
+    };
+  } else {
+    return {
+      error: true,
+      message: deletePeriodRes.message,
+    };
+  }
 };

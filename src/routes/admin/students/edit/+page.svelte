@@ -37,7 +37,7 @@
   <meta name="description" content="About this app" />
 </svelte:head>
 
-<div class="container bg-light-subtle border my-4 p-3 shadow-sm">
+<div class="container border rounded-2 my-4 p-3 shadow-sm">
   {#if form?.success}
     <MessageBanner type="success">
       Student mit Matrikelnummer {form?.id} wurde erfolgreich gespeichert!
@@ -56,7 +56,7 @@
 
   <div class="row g-3">
     <div class="col-12 fs-5">Studierenden bearbeiten</div>
-    <div class="col-12">
+    <div class="col-6">
       <label for="search-field" class="form-label"
         >Namen oder Matrikelnummer eingeben:</label
       >
@@ -67,6 +67,8 @@
         bind:value={searchTerm}
         on:input={searchStudent}
       />
+    </div>
+    <div class="col-12">
       <div class="row row-cols-1 row-cols-md-2">
         {#each filteredStudents as student}
           <div class="col">
