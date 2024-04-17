@@ -28,9 +28,7 @@
     </Collapse>
   </Navbar>-->
 
-  <main>
-    <slot />
-  </main>
+  <slot />
 </div>
 ========
 
