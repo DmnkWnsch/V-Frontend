@@ -156,7 +156,7 @@
   {/if}
   <RegisteredExamsOverview registrations={data.registrations} />
 
-  <Row class="d-flex align-items-center">
+  <Row cols={{ lg: 2, xs: 1 }} class="d-flex align-items-center mb-3">
     <Col>
       <h1>Anmelden zu einer Prüfung</h1>
     </Col>
@@ -177,75 +177,68 @@
       placeholder="Prüfung finden"
 			/>-->
     </Col>
-    <Col xs="auto">
-      <div>
-        <Button light on:click={applyFilter} color="info">Filter</Button>
-      </div>
-    </Col>
   </Row>
 
-  <Container style="background-color: #f6f6f6">
-    Filter
+  <Container style="background-color: #f6f6f6" class="pb-3">
+    <p class="my-0 py-2 fw-bold">Filtern</p>
 
-    <hr class="my-2" />
-    <Row>
-      <Col xs="6">
-        <Row cols={{ lg: 2, md: 3, sm: 0 }}>
+    <hr class="my-0 mb-3" />
+    <Row cols={{ lg: 2, sm: 2, xs: 1 }}>
+      <Col>
+        <Row cols={{ lg: 2, xs: 1 }} class="d-flex align-items-center g-3">
           <Col><h2>Anwendungsschwerpunkt</h2></Col>
           <Col>
-            <FormGroup>
-              <Input
-                bind:value={filter.course_name}
-                type="select"
-                name="select"
-                id="exampleSelect"
-              >
-                <option>Eingebettete Systeme</option>
-                <option>Medieninformatik</option>
-                <option>Verteilte Systeme</option>
-                <option>Computergraphik/Virtuelle Realität</option>
-              </Input>
-            </FormGroup>
+            <Input
+              bind:value={filter.course_name}
+              type="select"
+              name="select"
+              id="exampleSelect"
+            >
+              <option>Eingebettete Systeme</option>
+              <option>Medieninformatik</option>
+              <option>Verteilte Systeme</option>
+              <option>Computergraphik/Virtuelle Realität</option>
+            </Input>
           </Col>
           <Col><h2>Modulart</h2></Col>
           <Col>
-            <FormGroup>
-              <Input
-                bind:value={filter.module_type}
-                type="select"
-                name="select"
-                id="exampleSelect"
-              >
-                <option>Basismodule</option>
-                <option>Pflichtmodule</option>
-                <option>Wahlpflichtmodule</option>
-                <option>Ergänzungsmodule</option>
-                <option>Schlüsselkompetenzen</option>
-              </Input>
-            </FormGroup>
+            <Input
+              bind:value={filter.module_type}
+              type="select"
+              name="select"
+              id="exampleSelect"
+            >
+              <option>Basismodule</option>
+              <option>Pflichtmodule</option>
+              <option>Wahlpflichtmodule</option>
+              <option>Ergänzungsmodule</option>
+              <option>Schlüsselkompetenzen</option>
+            </Input>
           </Col>
           <Col><h2>Semester</h2></Col>
           <Col>
-            <FormGroup>
-              <Input
-                bind:value={filter.planned_semester}
-                type="select"
-                name="select"
-                id="exampleSelect"
-              >
-                <option>-</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-              </Input>
-            </FormGroup>
+            <Input
+              bind:value={filter.planned_semester}
+              type="select"
+              name="select"
+              id="exampleSelect"
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+            </Input>
+          </Col>
+          <Col>
+            <Button light on:click={applyFilter} color="info"
+              >Filter anwenden</Button
+            >
           </Col>
         </Row>
+        <Row cols={{ lg: 2, xs: 1 }}></Row>
       </Col>
-      <Col xs="1" />
       <Col xs="auto">
         <FormGroup check>
           <FormCheck type="checkbox" required label>
