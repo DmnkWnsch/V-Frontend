@@ -1,15 +1,17 @@
+// @ts-nocheck
 import consts from "../../consts";
+import util from "../../util";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
-  const memberResReq = await fetch(consts.API_URL + "/members/100000/results", {
+  const memberResReq = await fetch(consts.API_URL + "/members/100002/results", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
   let memberResRes = await memberResReq.json();
-  let exams_passed = memberResRes.filter((item) => item["status"] == "passed");
+  let exams_passed = memberResRes.filter((item) => item["status"] == "PASSED");
   let overall_result = (
     exams_passed.reduce((total, next) => total + parseFloat(next["grade"]), 0) /
     exams_passed.length
@@ -63,23 +65,12 @@ export async function load({ params }) {
       (item) => item["module_id"] == memberResultModuleRes["id"]
     );
 
-    let exam_types_short = {
-      WRITTEN: "schriftlich",
-      TASKS: "PVL",
-      OPAL: "online",
-    };
-    let exam_types_long = {
-      WRITTEN: "Schriftlich Prüfung",
-      TASKS: "Prüfungsvorleistung",
-      OPAL: "Onlineklausur",
-    };
-
     memberResRes[i] = {
       name: memberResultModuleRes["name"],
       tags:
         typeof memberResultExamRes === "undefined"
           ? ""
-          : [exam_types_short[memberResultExamRes["type"]]],
+          : [memberResultExamRes["type"]],
       points: memberResultModuleRes["credits"],
       id: memberResultModuleRes["id"],
       status: memberResRes[i]["status"],
@@ -94,21 +85,24 @@ export async function load({ params }) {
           type:
             typeof memberResultExamRes === "undefined"
               ? ""
-              : exam_types_long[memberResultExamRes["type"]],
-          result: /**memberResRes[i]["grade"].toFixed(2) */ 2,
+              : memberResultExamRes["type"],
+          result: memberResRes[i]["grade"],
+          try: memberResRes[i]["try"],
           points: memberResultModuleRes["credits"],
           date: "07.02.2023",
           exam_content:
             typeof memberResultExamRes === "undefined"
               ? ""
-              : exam_types_long[memberResultExamRes["type"]],
-          semester: "Wintersemester 2022",
-          examiners: "Max Mustermann, Hermann Mann, Christian Franz",
+              : consts.getExamTypeName(memberResultExamRes["type"]),
+          semester: memberResRes[i]["term"],
         },
       ],
     };
 
-    if (memberResRes[i]["status"] == "passed") {
+    if (
+      memberResRes[i]["status"] == "PASSED" &&
+      memberResRes[i]["tags"][0] != "TASKS"
+    ) {
       total_points += memberResultModuleRes["credits"];
     }
   }

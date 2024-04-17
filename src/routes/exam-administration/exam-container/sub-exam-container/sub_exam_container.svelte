@@ -12,72 +12,62 @@
     CardTitle,
     CardBody,
   } from "sveltestrap";
+  import util from "../../../../util";
+  import consts from "../../../../consts";
 
   export let data;
 </script>
 
 <Card>
   <CardHeader>
-    <CardTitle><b>{data["type"]}: </b>{data["name"]}</CardTitle>
+    <CardTitle
+      >{consts.getExamTypeName(data.type)}
+
+      <span class={"badge text-bg-" + (data.result < 5 ? "success" : "danger")}>
+        {#if data.result < 5}
+          Bestanden
+        {:else}
+          Nicht bestanden
+        {/if}
+      </span>
+    </CardTitle>
   </CardHeader>
   <CardBody>
-    <Row cols={2} class="py-1">
-      <Col sm={{ size: 10, offset: 0 }}>
-        <Row cols={2}>
+    <Row cols={{ lg: 2, sm: 2, xs: 1 }}>
+      <Col>
+        <Row cols={{ lg: 2, xs: 1 }}>
+          <Col><b>Prüfungsart</b></Col>
+          <Col>{data.exam_content}</Col>
+
+          <Col><b>Bewertung</b></Col>
+          <Col>{data.result}</Col>
+
+          <Col><b>Versuch</b></Col>
+          <Col>{data.try}</Col>
+
+          <Col><b>Status</b></Col>
           <Col>
-            <Row cols={2}>
-              <Col>
-                <b>Bewertung:</b>
-              </Col>
-              <Col>
-                {data["result"]}
-              </Col>
-              <Col>
-                <b>Leistungspunkte:</b>
-              </Col>
-              <Col>
-                {data["points"]}
-              </Col>
-              <Col>
-                <b>Datum:</b>
-              </Col>
-              <Col>
-                {data["date"]}
-              </Col>
-              <Col>
-                <b>Prügungsart:</b>
-              </Col>
-              <Col>
-                {data["exam_content"]}
-              </Col>
-            </Row>
-          </Col>
-          <Col>
-            <Row cols={2}>
-              <Col>
-                <b>Semester der Leistung:</b>
-              </Col>
-              <Col>
-                {data["semester"]}
-              </Col>
-              <Col>
-                <p><b>Prüfer:</b></p>
-              </Col>
-              <Col>
-                {data["examiners"]}
-              </Col>
-            </Row>
-          </Col>
+            {#if data.result < 5}
+              Bestanden
+            {:else}
+              Nicht bestanden
+            {/if}</Col
+          >
         </Row>
       </Col>
-      <Col sm={{ size: 2, offset: 0 }}>
-        <Container
-          class="h-100 d-flex justify-content-center align-items-center"
-        >
-          <Button class="bg-success border border-0">Wiederholen</Button>
-        </Container>
+      <Col>
+        <Row cols={{ lg: 2, xs: 1 }}>
+          <Col><b>Semester der Leistung</b></Col>
+          <Col>{data.semester}</Col>
+
+          {#if data.type != "TASKS"}
+            <Col><b>Erhaltene Leistungspunkte</b></Col>
+            <Col>
+              {data.result < 5 ? data.points : 0}
+            </Col>
+          {/if}
+        </Row>
       </Col>
     </Row>
   </CardBody>
 </Card>
-<br />

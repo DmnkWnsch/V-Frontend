@@ -122,6 +122,11 @@
               {id}
             </div>
             <div class="col">
+              <b>LP:</b>
+              {credits}
+            </div>
+            <div class="w-100 d-block d-md-none"></div>
+            <div class="col">
               {#each exams as exam}
                 <span
                   class={"badge me-2 text-" + util.getExamColorBadge(exam.type)}

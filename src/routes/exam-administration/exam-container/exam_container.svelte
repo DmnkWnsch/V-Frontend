@@ -1,48 +1,76 @@
 <script>
-// @ts-nocheck
+  // @ts-nocheck
 
   // import sveltestrap components
   import {
-      Accordion,
-      AccordionItem,
-      Container,
-      Row,
-      Col,
-      Button,
-      Badge
-      } from 'sveltestrap';
-  
+    Accordion,
+    AccordionItem,
+    Container,
+    Row,
+    Col,
+    Button,
+    Badge,
+  } from "sveltestrap";
+
   // import custom components
-  import Sub_exam_container from './sub-exam-container/sub_exam_container.svelte';
+  import Sub_exam_container from "./sub-exam-container/sub_exam_container.svelte";
+  import util from "../../../util";
 
   export let active;
-  active = ( active == "true" ) ? "active" : "";
+  active = active == "true" ? "active" : "";
   export let data;
-  
 </script>
 
-<style>
-  @import './style.css';
-</style>
+<div class="accordion" id={"result" + data.id}>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target={"#collapse" + data.id}
+        aria-expanded="false"
+        aria-controls={"collapse" + data.id}
+      >
+        <div class="row w-100 g-2 g-md-0">
+          <div class="col-12 col-md-4 pe-3 text-wrap fw-bold">{data.name}</div>
+          <div class="w-100 d-block d-md-none"></div>
+          <div class="col">
+            <b>ID:</b>
+            {data.id}
+          </div>
+          <div class="col">
+            <b>LP:</b>
+            {data.points}
+          </div>
+          <div class="w-100 d-block d-md-none"></div>
+          <div class="col">
+            {#each data.tags as exam}
+              <span class={"badge me-2 text-" + util.getExamColorBadge(exam)}>
+                {util.getExamShortNameByType(exam)}</span
+              >
+            {/each}
+          </div>
+        </div>
+      </button>
+    </h2>
 
-<Accordion>
-  <AccordionItem {active}>
-    <span slot="header">
-      <div class="d-flex justify-content-between w-100">
-        <b>{data["name"]}</b>
-        {#each data["tags"] as value}
-          <Badge class="mx-1 badge_{value}">{value}</Badge>
+    <div
+      id={"collapse" + data.id}
+      class="accordion-collapse collapse"
+      data-bs-parent={"result" + data.id}
+    >
+      <div class="accordion-body">
+        {#each data["sub_exams"] as value, index (index)}
+          <div class={index != 0 ? "mt-3" : ""}>
+            <svelte:component this={Sub_exam_container} data={value} />
+          </div>
         {/each}
-        <span class="mx-5">
-          <b>Leistungspunkte: </b>{data["points"]}
-        </span>
-        <span class="mx-3">
-          <b>ID: </b>{data["id"]}
-        </span>
       </div>
-    </span>
-    {#each data["sub_exams"] as value}
-      <svelte:component this={Sub_exam_container} data={value}/>
-    {/each}
-  </AccordionItem>
-</Accordion>
+    </div>
+  </div>
+</div>
+
+<style>
+  @import "./style.css";
+</style>
