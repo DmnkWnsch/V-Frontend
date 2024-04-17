@@ -21,7 +21,7 @@
 </script>
 
 <Navbar style="background-color: #0e4e3f" dark expand="md">
-  <NavbarBrand>Prüfungsverwaltung</NavbarBrand>
+  <NavbarBrand>SB-Service - Prüfungen</NavbarBrand>
   <NavbarToggler on:click={() => (isOpen = !isOpen)} />
   <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
     <Nav class="ms-auto" navbar>
