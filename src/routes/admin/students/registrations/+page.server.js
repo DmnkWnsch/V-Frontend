@@ -9,6 +9,7 @@ export const actions = {
       member_id: formData.get("id"),
       exam_plan_id: formData.get("planned_exam"),
       status: formData.get("status"),
+      admin: true,
     };
 
     const registrationRequest = await fetch(consts.API_URL + "/registrations", {
@@ -42,6 +43,7 @@ export const actions = {
       const registration = {
         member_id: formData.get("id"),
         exam_plan_id: formData.get("exam_plan_id"),
+        admin: true,
       };
 
       const deleteRegistrationRequest = await fetch(
