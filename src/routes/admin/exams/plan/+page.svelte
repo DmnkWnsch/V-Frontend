@@ -87,7 +87,7 @@
     </MessageBanner>
   {/if}
 
-  <form action="?/planExam" method="POST" class="row g-3">
+  <div class="row g-3">
     <div class="col-12 fs-5">Prüfungstermin hinzufügen</div>
     <div class="col-4">
       <label class="form-label" for="search"
@@ -127,35 +127,37 @@
           <PlannedExamsTable examId={selectedExamId} tableType="EDIT" />
         {/key}
 
-        <div class="col-12 fs-5">Neuen Prüfungstermin festlegen</div>
-        <div class="col col-lg-6">
-          <label class="form-label" for="reg_period">Anmeldeperiode</label>
-          <select
-            class="form-select"
-            id="reg_period"
-            name="reg_period"
-            required
-          >
-            {#each data.periods as period}
-              <option value={period.id}>{period.name}</option>
-            {/each}
-          </select>
-        </div>
-        <div class="col col-lg-3">
-          <label class="form-label" for="date">Prüfungsdatum</label>
-          <input
-            class="form-control"
-            id="date"
-            name="date"
-            type="date"
-            min={util.getMinForDatePicker()}
-            required
-          />
-        </div>
+        <form action="?/planExam" method="POST" class="row g-3">
+          <div class="col-12 fs-5">Neuen Prüfungstermin festlegen</div>
+          <div class="col col-lg-6">
+            <label class="form-label" for="reg_period">Anmeldeperiode</label>
+            <select
+              class="form-select"
+              id="reg_period"
+              name="reg_period"
+              required
+            >
+              {#each data.periods as period}
+                <option value={period.id}>{period.name}</option>
+              {/each}
+            </select>
+          </div>
+          <div class="col col-lg-3">
+            <label class="form-label" for="date">Prüfungsdatum</label>
+            <input
+              class="form-control"
+              id="date"
+              name="date"
+              type="date"
+              min={util.getMinForDatePicker()}
+              required
+            />
+          </div>
 
-        <div class="col-12">
-          <button class="btn btn-success">Prüfungstermin festlegen</button>
-        </div>
+          <div class="col-12">
+            <button class="btn btn-success">Prüfungstermin festlegen</button>
+          </div>
+        </form>
       {:else}
         <div class="col-12">Bitte eine Prüfung auswählen.</div>
       {/if}
@@ -166,5 +168,5 @@
         <b>Fehler:</b> Das Modul <b>{searchInput}</b> existiert nicht.
       </div>
     {/if}
-  </form>
+  </div>
 </div>
