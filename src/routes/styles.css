@@ -114,13 +114,11 @@ h2 {
   margin: 0;
 }
 
-.container {
-  padding-top: calc(var(--bs-gutter-x) * 0.5);
-}
 .button {
   padding: 0.2em;
   top: 50%;
 }
+
 .visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);
