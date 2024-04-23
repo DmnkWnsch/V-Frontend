@@ -1,15 +1,21 @@
 // @ts-nocheck
 import consts from "../../consts";
 import util from "../../util";
+import { getDemoMemberId, setNewDemoMemberId } from "../demo";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
-  const memberResReq = await fetch(consts.API_URL + "/members/100002/results", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const demoId = await getDemoMemberId();
+
+  const memberResReq = await fetch(
+    consts.API_URL + "/members/" + demoId + "/results",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   let memberResRes = await memberResReq.json();
   let exams_passed = memberResRes.filter((item) => item["status"] == "PASSED");
   let overall_result = (
@@ -132,9 +138,24 @@ export async function load({ params }) {
 
   memberResRes = Object.values(groupedById);
 
+  if (isNaN(overall_result)) {
+    overall_result = "-";
+  }
+
   return {
     results: memberResRes,
     overall_result: overall_result,
     total_points: total_points,
+    demoId: demoId,
   };
 }
+
+/** @type {import('./$types').Actions} */
+export const actions = {
+  manageDemoId: async ({ cookies, request }) => {
+    const formData = await request.formData();
+    const newDemoId = formData.get("demo_id");
+
+    await setNewDemoMemberId(newDemoId);
+  },
+};

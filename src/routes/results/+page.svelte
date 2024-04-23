@@ -30,6 +30,7 @@
   import Exam_container from "./exam-container/exam_container.svelte";
 
   import { enhance } from "$app/forms";
+  import DemoMember from "../DemoMember.svelte";
 
   let filter_options = {
     anwendungsschwerpunkt: "Alle",
@@ -80,6 +81,8 @@
   <title>Prüfungsverwaltung</title>
   <meta name="description" content="Verwaltung von Prüfungen" />
 </svelte:head>
+
+<DemoMember currentPath="results" demoId={data.demoId} />
 
 <Container class="my-4">
   <h1>Prüfungsergebnisse</h1>
@@ -227,6 +230,12 @@
       <br />
     {/if}
   {/each}
+
+  {#if data.results.length == 0}
+    <Container class="d-flex justify-content-center">
+      <b class="text-primary">Für Sie sind noch keine Leistungen hinterlegt.</b>
+    </Container>
+  {/if}
 </Container>
 
 <style>

@@ -13,13 +13,13 @@
   } from "sveltestrap";
   import util from "../../../util";
   import consts from "../../../consts";
-  import { storedMemberId } from "../../MemberIdStore";
 
   export let type;
   export let credits;
   export let plannedExam;
   export let registration;
   export let lastResult;
+  export let storedMemberId;
 
   const isRegistrationPossible = () => {
     let periodStart = new Date(plannedExam.start_date);

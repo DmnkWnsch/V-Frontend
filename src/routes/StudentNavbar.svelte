@@ -2,7 +2,6 @@
   // @ts-nocheck
 
   import { page } from "$app/stores";
-  import { get } from "svelte/store";
   import {
     Collapse,
     Navbar,
@@ -12,22 +11,12 @@
     NavItem,
     NavLink,
   } from "sveltestrap";
-  import { setStoredMemberId, storedMemberId } from "./MemberIdStore";
 
   let isOpen = false;
   // @ts-ignore
   function handleUpdate(event) {
     isOpen = event.detail.isOpen;
   }
-
-  let memberIdInput = storedMemberId;
-  const setNewMemberId = () => {
-    if (memberIdInput.toString().trim().length == 6) {
-      setStoredMemberId(memberIdInput);
-    } else {
-      // Show error message
-    }
-  };
 </script>
 
 <Navbar style="background-color: #0e4e3f" dark expand="md">
@@ -54,28 +43,3 @@
     </Nav>
   </Collapse>
 </Navbar>
-
-<div class="container mt-3">
-  <div class="alert alert-warning">
-    <div class="row g-3 d-flex align-items-center">
-      <div class="col"><b>Matrikelnummer für Demonstration:</b></div>
-      <div class="col">
-        <div class="input-group">
-          <input
-            class="form-control"
-            id="target_member"
-            type="number"
-            min="100000"
-            max="999999"
-            bind:value={memberIdInput}
-          />
-          <button
-            class="btn btn-primary"
-            type="button"
-            on:click={setNewMemberId}>Setzen</button
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

@@ -15,6 +15,7 @@
 
   export let examRegistrations;
   export let results;
+  export let memberId;
 
   let exams = [];
   let plannedExams = [];
@@ -154,6 +155,7 @@
                 ? examRegistrations[exam.id]
                 : null}
               lastResult={results[exam.id] ? results[exam.id] : null}
+              storedMemberId={memberId}
             />
           {/each}
         </div>

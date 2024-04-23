@@ -12,10 +12,10 @@
   } from "sveltestrap";
   import consts from "../../../consts";
   import util from "../../../util";
-  import { storedMemberId } from "../../MemberIdStore";
   import { onMount } from "svelte";
 
   export let registrations;
+  export let memberId;
 
   const isUnregisteringPossible = (date) => {
     // 7 days in milliseconds
@@ -147,7 +147,7 @@
                     method="POST"
                     class="d-flex justify-content-center mt-3"
                   >
-                    <input hidden name="member" value={storedMemberId} />
+                    <input hidden name="member" value={memberId} />
                     <input hidden name="plan_id" value={reg.exam_plan_id} />
 
                     <Button color="danger" class="px-3 col-12 col-md-4">

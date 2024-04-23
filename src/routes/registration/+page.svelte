@@ -18,12 +18,9 @@
   } from "sveltestrap";
   import ModuleAcccordion from "./components/moduleAcccordion.svelte";
   import consts from "../../consts";
-  import util from "../../util";
   import MessageBanner from "../admin/components/MessageBanner.svelte";
-  import { storedMemberId } from "../MemberIdStore";
-  import { onMount } from "svelte";
   import RegisteredExamsOverview from "./components/RegisteredExamsOverview.svelte";
-  import { demoMemberId } from "$lib/MemberIdTest";
+  import DemoMember from "../DemoMember.svelte";
 
   export let data;
   export let form;
@@ -139,6 +136,8 @@
   <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
+<DemoMember currentPath="registration" demoId={data.demoId} />
+
 <div class="container">
   {#if form?.success}
     <MessageBanner type="success">
@@ -155,7 +154,10 @@
       {form?.message}
     </MessageBanner>
   {/if}
-  <RegisteredExamsOverview registrations={data.registrations} />
+  <RegisteredExamsOverview
+    registrations={data.registrations}
+    memberId={data.demoId}
+  />
 
   <Row cols={{ lg: 2, xs: 1 }} class="d-flex align-items-center mb-3">
     <Col>
@@ -264,6 +266,7 @@
                 credits={mod.credits}
                 examRegistrations={getRegistrationData()}
                 results={getResultsData()}
+                memberId={data.demoId}
                 on:finish={increaseFinishedModules}
               />
             {:else if filter.planned_semester == mod.planned_semester}
@@ -273,6 +276,7 @@
                 credits={mod.credits}
                 examRegistrations={getRegistrationData()}
                 results={getResultsData()}
+                memberId={data.demoId}
                 on:finish={increaseFinishedModules}
               />
             {/if}
@@ -288,6 +292,7 @@
                 credits={mod.credits}
                 examRegistrations={getRegistrationData()}
                 results={getResultsData()}
+                memberId={data.demoId}
                 on:finish={increaseFinishedModules}
               />
             {:else if filter.planned_semester == mod.planned_semester}
@@ -297,6 +302,7 @@
                 credits={mod.credits}
                 examRegistrations={getRegistrationData()}
                 results={getResultsData()}
+                memberId={data.demoId}
                 on:finish={increaseFinishedModules}
               />
             {/if}
@@ -312,6 +318,7 @@
             credits={mod.credits}
             examRegistrations={getRegistrationData()}
             results={getResultsData()}
+            memberId={data.demoId}
             on:finish={increaseFinishedModules}
           />
         {:else if filter.planned_semester == mod.planned_semester}
@@ -321,6 +328,7 @@
             credits={mod.credits}
             examRegistrations={getRegistrationData()}
             results={getResultsData()}
+            memberId={data.demoId}
             on:finish={increaseFinishedModules}
           />
         {/if}
@@ -334,6 +342,7 @@
             credits={mod.credits}
             examRegistrations={getRegistrationData()}
             results={getResultsData()}
+            memberId={data.demoId}
             on:finish={increaseFinishedModules}
           />
         {:else if filter.planned_semester == mod.planned_semester}
@@ -343,6 +352,7 @@
             credits={mod.credits}
             examRegistrations={getRegistrationData()}
             results={getResultsData()}
+            memberId={data.demoId}
             on:finish={increaseFinishedModules}
           />
         {/if}

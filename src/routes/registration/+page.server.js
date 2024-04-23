@@ -1,10 +1,11 @@
 // @ts-nocheck
 import consts from "../../consts";
-import { get } from "svelte/store";
-import { storedMemberId } from "../MemberIdStore";
+import { getDemoMemberId, setNewDemoMemberId } from "../demo";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
+  const storedMemberId = await getDemoMemberId();
+
   const ModulesReq = await fetch(consts.API_URL + "/modules", {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -51,6 +52,7 @@ export async function load({ params }) {
     modules: ModulesRes,
     registrations: registrationsResponse.data,
     results: resultsResponse,
+    demoId: storedMemberId,
     /*courseOneModules: courseOneModulesRes,
                 courseTwoModules: courseTwoModulesRes,
                 courseThreeModules: courseThreeModulesRes,
@@ -60,6 +62,13 @@ export async function load({ params }) {
 
 /** @type {import('./$types').Actions} */
 export const actions = {
+  manageDemoId: async ({ cookies, request }) => {
+    const formData = await request.formData();
+    const newDemoId = formData.get("demo_id");
+
+    await setNewDemoMemberId(newDemoId);
+  },
+
   register: async ({ cookies, request }) => {
     const formData = await request.formData();
 
