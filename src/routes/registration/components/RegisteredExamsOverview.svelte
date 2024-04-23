@@ -29,6 +29,15 @@
     return targetDate.getTime() - time > currentDate.getTime();
   };
 
+  const isExamInPast = (date) => {
+    const targetDate = new Date(date);
+    const currentDate = new Date();
+
+    targetDate.setHours(10, 0, 0, 0);
+
+    return targetDate.getTime() < currentDate.getTime();
+  };
+
   const loadExaminers = async () => {
     for (let i = 0; i < registrations.length; i++) {
       const examPlanId = registrations[i].exam_plan_id;
@@ -145,6 +154,12 @@
                       Abmelden
                     </Button>
                   </form>
+                {:else if isExamInPast(reg.date)}
+                  <div
+                    class="d-flex justify-content-start mt-3 text-primary fw-bold"
+                  >
+                    Diese Prüfung hat bereits stattgefunden.
+                  </div>
                 {:else}
                   <div
                     class="d-flex justify-content-start mt-3 text-danger fw-bold"

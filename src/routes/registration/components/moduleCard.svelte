@@ -44,7 +44,7 @@
   <CardBody>
     {#if lastResult?.status == "PASSED"}
       <div class="fw-bold text-success">
-        Sie haben diese Prüfung bereits bestanden.
+        Sie haben diese Prüfung bereits im {lastResult?.term} bestanden.
       </div>
     {:else}
       {#if !plannedExam}

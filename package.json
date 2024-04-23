@@ -22,6 +22,7 @@
   },
   "type": "module",
   "dependencies": {
+    "svelte-local-storage-store": "^0.6.4",
     "sveltestrap": "^5.11.2"
   }
 }

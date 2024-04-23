@@ -23,6 +23,7 @@
   import { storedMemberId } from "../MemberIdStore";
   import { onMount } from "svelte";
   import RegisteredExamsOverview from "./components/RegisteredExamsOverview.svelte";
+  import { demoMemberId } from "$lib/MemberIdTest";
 
   export let data;
   export let form;
@@ -238,13 +239,6 @@
           </Col>
         </Row>
         <Row cols={{ lg: 2, xs: 1 }}></Row>
-      </Col>
-      <Col xs="auto">
-        <FormGroup check>
-          <FormCheck type="checkbox" required label>
-            <p slot="label">Bestandene Prüfungen ausblenden</p>
-          </FormCheck>
-        </FormGroup>
       </Col>
     </Row>
   </Container>
