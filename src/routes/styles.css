@@ -17,7 +17,6 @@
 }
 
 body {
-  min-height: 100vh;
   margin: 0;
   background-attachment: fixed;
   background-color: var(--color-bg-1);
@@ -48,10 +47,6 @@ p {
 a {
   color: var(--color-theme-1);
   text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 h1 {

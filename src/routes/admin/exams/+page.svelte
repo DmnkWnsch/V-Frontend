@@ -3,6 +3,11 @@
   import LandingPageItem from "../components/LandingPageItem.svelte";
 </script>
 
+<svelte:head>
+  <title>PV-A Prüfungsverwaltung</title>
+  <meta name="description" content="About this app" />
+</svelte:head>
+
 <LandingPage>
   <LandingPageItem title="Planen von Prüfungen" url="/admin/exams/plan">
     Prüfungstermine festlegen

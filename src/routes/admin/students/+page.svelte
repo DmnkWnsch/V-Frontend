@@ -3,6 +3,11 @@
   import LandingPageItem from "../components/LandingPageItem.svelte";
 </script>
 
+<svelte:head>
+  <title>PV-A Studentenverwaltung</title>
+  <meta name="description" content="About this app" />
+</svelte:head>
+
 <LandingPage>
   <LandingPageItem title="Student anlegen" url="/admin/students/add">
     Einen neuen Studenten anlegen

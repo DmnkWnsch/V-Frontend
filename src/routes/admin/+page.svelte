@@ -3,17 +3,23 @@
   import LandingPageItem from "./components/LandingPageItem.svelte";
 </script>
 
+<svelte:head>
+  <title>PV-A Startseite</title>
+  <meta name="description" content="About this app" />
+</svelte:head>
+
 <LandingPage>
   <LandingPageItem title="Module verwalten" url="/admin/modules"
-    >Module verwalten</LandingPageItem
+    >Module erstellen oder bearbeiten</LandingPageItem
   >
   <LandingPageItem title="Noten verwalten" url="/admin/grades"
-    >Noten verwalten</LandingPageItem
+    >Noten vergeben oder bearbeiten</LandingPageItem
   >
   <LandingPageItem title="Prüfungsverwaltung" url="/admin/exams"
-    >Prüfungen verwalten</LandingPageItem
+    >Prüfungsplan erstellen, Prüfer festlegen, Anmeldeperioden verwalten und
+    Teilnehmerlisten generieren</LandingPageItem
   >
   <LandingPageItem title="Studenten verwalten" url="/admin/students"
-    >Studenten verwalten</LandingPageItem
+    >Studenten anlegen, bearbeiten und deren Prüfungsanmeldungen verwalten</LandingPageItem
   >
 </LandingPage>

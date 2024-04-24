@@ -20,6 +20,6 @@
     transition: all 300ms;
   }
   .hoverable:hover {
-    background-color: var(--bs-success-bg-subtle);
+    background-color: var(--bs-secondary-bg-subtle);
   }
 </style>

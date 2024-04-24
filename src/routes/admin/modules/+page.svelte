@@ -3,6 +3,11 @@
   import LandingPageItem from "../components/LandingPageItem.svelte";
 </script>
 
+<svelte:head>
+  <title>PV-A Modulverwalting</title>
+  <meta name="description" content="About this app" />
+</svelte:head>
+
 <LandingPage>
   <LandingPageItem title="Module hinzufügen" url="/admin/modules/add">
     In diesem Bereich werden neue Module mit ihren zugehörigen Prüfungen

@@ -78,7 +78,7 @@
 </script>
 
 <svelte:head>
-  <title>Prüfungsverwaltung</title>
+  <title>Leistungsübersicht</title>
   <meta name="description" content="Verwaltung von Prüfungen" />
 </svelte:head>
 
