@@ -19,8 +19,6 @@ npm run dev
 Um die Software lauffähig auf einem externen Server zu machen, muss sie zuvor
 gebaut werden.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
 ```bash
 # Bauprozess starten, ggf ist wieder --legacy-peer-deps nötig
 npm run build --legacy-peer-deps
