@@ -32,3 +32,5 @@ Dafür den erzeugten `build`-Ordner und `package.json` sowie `package-lock.json`
 # Node-Server starten
 ORIGIN=<Server-Adresse> node ./build
 ```
+
+Die ORIGIN-Variable ist nötig, da sonst CORS-Probleme auftreten und das Frontend nicht mit der API kommunizieren kann.
