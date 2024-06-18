@@ -1,36 +1,21 @@
-# Teamorientiertes Praktikum
+# Frontend für eine Verwaltungssoftware von Prüfungen, Studenten, Modulen und Noten
 
-Im Rahmen des Teamorientierten Praktikums haben wir uns dafür entschieden, den SB-Service zu überarbeiten.
+Die Verwaltungssoftware besteht aus diesem Teil und einer [API](https://github.com/DmnkWnsch/V-API).
 
-## System starten
+Dieser Teil der Software wurde **nicht** von mir allein erstellt - es ist im Rahmen einer Gruppenarbeit (3 Mitglieder) entstanden.<br>
+Mein Aufgabenbreich lag hier vorrangig im [Admin-Panel](https://github.com/DmnkWnsch/PV-Frontend/tree/main/src/routes/admin) sowie in der Einbindung der Daten unserer API in die verbleibenden Seiten.
 
-Um das Frontend zu starten müssen folgende Schritte ausgeführt werden:
+Verwendet wurde **SvelteKit**, somit wurde hauptsächlich **JavaScript** und **HTML** eingesetzt. Zur Gestaltung haben wir **SvelteStrap** verwendet, also eine **Bootstrap-Version** mit Komponenten für Svelte.<br>
+Zur Initialen Gestaltung von Prototypen wurde **Figma** verwendet.
 
-```bash
-# Dependencies installieren, durch Sveltestrap ist --legacy-peer-deps nötig
-npm install --legacy-peer-deps
+## Nutzen der Software
 
-# Entwicklungsumgebung starten
-npm run dev
-```
+Im Rahmen eines Software-Projekts in der Universität haben wir uns dafür entschieden, die bereitgestellte Studentenverwaltung zu überarbeiten.
 
-## System exportieren
+Dabei ist zu beachten, dass unser Projekt nur im begrenzten Rahmen unseres Studiengangs funktioniert, da wir Einschränkungen treffen mussten um die Komplexität im Rahmen zu halten.
 
-Um die Software lauffähig auf einem externen Server zu machen, muss sie zuvor
-gebaut werden.
+Dementsprechend können hier unter anderem Module erstellt oder bearbeitet werden, Studenten angelegt, Prüfungen erstellt und geplant sowie Noten vergeben und bearbeitet werden. Des weiteren wurden noch nützliche Funktionen wie das Erstellen von Teilnehmerlisten für bestimmte Prüfungen eingebunden.
 
-```bash
-# Bauprozess starten, ggf ist wieder --legacy-peer-deps nötig
-npm run build --legacy-peer-deps
-```
+## Beispiel-Seite
 
-Es wird ein fertiger Node-Server erstellt, der dann ausgeführt werden kann.
-
-Dafür den erzeugten `build`-Ordner und `package.json` sowie `package-lock.json` an den gewünschten Ort verschieben
-
-```bash
-# Node-Server starten
-ORIGIN=<Server-Adresse> node ./build
-```
-
-Die ORIGIN-Variable ist nötig, da sonst CORS-Probleme auftreten und das Frontend nicht mit der API kommunizieren kann.
+![Beispiel-Seite](Example-Admin.png)
