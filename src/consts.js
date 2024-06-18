@@ -1,5 +1,5 @@
 // @ts-nocheck
-const API_URL = "http://85.209.49.177:3210";
+const API_URL = "";
 
 const courses = [
   {
